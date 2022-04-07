@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@truffle/hdwallet-provider": "^2.0.4",
+    "@trufflesuite/bigint-buffer": "^1.1.9",
+    "dotenv": "^16.0.0",
+    "path": "^0.12.7",
+    "truffle": "^5.5.7"
+  }
+}
