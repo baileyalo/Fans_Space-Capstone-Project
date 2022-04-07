@@ -63,7 +63,7 @@ class App extends Component {
 				.getAllAddresses()
 				.call();
 			this.setState({ deployedTokenAddressList: addressess });
-			// console.log(this.state.deployedTokenAddressList);
+			 //console.log(this.state.deployedTokenAddressList);
 		} catch (error) {
 			// Catch any errors for any of the above operations.
 			alert(

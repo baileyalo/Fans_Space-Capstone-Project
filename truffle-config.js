@@ -1,37 +1,12 @@
-/**
- * Use this file to configure your truffle project. It's seeded with some
- * common settings for different networks and features like migrations,
- * compilation and testing. Uncomment the ones you need or modify
- * them to suit your project as necessary.
- *
- * More information about configuration can be found at:
- * 
- * https://trufflesuite.com/docs/truffle/reference/configuration
- *
- * To deploy via Infura you'll need a wallet provider (like @truffle/hdwallet-provider)
- * to sign your transactions before they're sent to a remote public node. Infura accounts
- * are available for free at: infura.io/register.
- *
- * You'll also need a mnemonic - the twelve word phrase the wallet uses to generate
- * public/private key pairs. If you're publishing your code to GitHub make sure you load this
- * phrase from a file you've .gitignored so it doesn't accidentally become public.
- *
- */
-
-// const HDWalletProvider = require('@truffle/hdwallet-provider');
-//
-// const fs = require('fs');
-// const mnemonic = fs.readFileSync(".secret").toString().trim();
-
-
 const path = require("path");
-var HDWalletProvider = require("@truffle/hdwallet-provider");
+const HDWalletProvider = require("@truffle/hdwallet-provider");
 require("dotenv").config();
-var mnemonic =
+const mnemonic =
 	"round claim canal social snake concert forest goose blast lift attend paddle" ||
 	process.env.MNEMONIC;
-var apiKey =
-	"https://rinkeby.infura.io/v3/b8c123d7c5ac4e6284451514c5c24efc" ||
+
+const apiKey= 
+	'https://rinkeby.infura.io/v3/b8c123d7c5ac4e6284451514c5c24efc' ||
 	process.env.API_KEY;
 
 
@@ -104,7 +79,7 @@ module.exports = {
       //  },
       //  evmVersion: "byzantium"
       // }
-    }
+    },
   },
 
   // Truffle DB is currently disabled by default; to enable it, change enabled:
