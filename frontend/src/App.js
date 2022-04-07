@@ -146,7 +146,7 @@ class App extends Component {
 				style={{ marginTop: "50px", marginBottom: "50px" }}
 			>
 				<Image
-					style={{ width: "30%" }}
+					style={{ width: "50%" }}
 					src={require("./images/logo.png")}
 					rounded
 				/>
@@ -156,7 +156,7 @@ class App extends Component {
 						padding: "20px",
 					}}
 				>
-					<h1> Token Creator</h1>
+					<h1> Create Token </h1>
 					<Form
 						style={{ paddingTop: 50 }}
 						onSubmit={(event) => {
@@ -224,22 +224,22 @@ class App extends Component {
 							The{" "}
 							<span style={{ color: this.state.name ? "red" : "black" }}>
 								{" "}
-								{this.state.name ? this.state.name : "<<Token-name>>"}{" "}
+								{this.state.name ? this.state.name : "[Token-name]"}{" "}
 							</span>{" "}
 							Token with symbol{" "}
 							<span style={{ color: this.state.symbol ? "red" : "black" }}>
-								{this.state.symbol ? this.state.symbol : "<<symbol>>"}{" "}
+								{this.state.symbol ? this.state.symbol : "[symbol]"}{" "}
 							</span>{" "}
 							with{" "}
 							<span style={{ color: this.state.totalSupply ? "red" : "black" }}>
 								{this.state.totalSupply
 									? this.state.totalSupply
-									: "<<total supply>>"}{" "}
+									: "[Total Supply]"}{" "}
 							</span>{" "}
 							Tokens generated at address{" "}
 							<span style={{ color: this.state.address ? "red" : "black" }}>
 								{" "}
-								{this.state.address ? this.state.address : "<<address>>"}{" "}
+								{this.state.address ? this.state.address : "[Address]"}{" "}
 							</span>
 						</div>
 						{this.state.loader ? (
