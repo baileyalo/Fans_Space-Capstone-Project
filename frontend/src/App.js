@@ -3,7 +3,6 @@ import TokenGenerator from "./contracts/TokenGenerator.json";
 import getWeb3 from "./getWeb3";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import Image from "react-bootstrap/Image";
 import Spinner from "react-bootstrap/Spinner";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -36,7 +35,7 @@ class App extends Component {
 			const accounts = await web3.user.eth.getAccounts();
 			// const raghuAccounts = process.env.REACT_APP_ACCOUNT;
 			const alAccounts =
-				"0x7c91d48ed875a53b803ed0f9F825eCF20F1DF619" ||
+				"0x35E95CFa48001B9025b560D0865E4F8540313d8d" ||
 				process.env.REACT_APP_ACCOUNT;
 			// console.log(accounts);
 			// console.log(alAccounts);
@@ -108,7 +107,7 @@ class App extends Component {
 				chain: "rinkeby",
 				hardfork: "petersburg",
 			},
-			"ca2f734914dd47c35f4fab98972e919d47f96ceffdb47a212a0ebf3175e69e89" ||
+			"e231091d3a3f4573486c566f787547ae4182e90eaf5fa086f6c7a089d9f85553" ||
 				process.env.REACT_APP_PVT_KEY
 		); // replace with process.env.REACT_APP_PVT_KEY
 		// console.log(tx);
@@ -143,33 +142,24 @@ class App extends Component {
 		return (
 			<div
 				className="App container bg-white"
-				style={{ marginTop: "50px", marginBottom: "50px" }}
+				style={{ marginTop: "20px", marginBottom: "20px" }}
 			>
-				<Image
-					style={{ width: "50%" }}
-					src={require("./images/logo.png")}
-					rounded
-				/>
+			
 
 				<div
-					style={{
-						padding: "20px",
+						style={{
+						padding: "2px",
+						
 					}}
 				>
 					<h1> Create Token </h1>
 					<Form
-						style={{ paddingTop: 50 }}
-						onSubmit={(event) => {
-							this.makeToken();
-							event.preventDefault();
+						style={{ paddingTop: 50 }}onSubmit={(event) => {this.makeToken();event.preventDefault();
 						}}
 					>
 						<Form.Group controlId="tokenName">
 							<Form.Label>Token Name</Form.Label>
-							<Form.Control
-								value={this.state.name}
-								onChange={(event) => {
-									this.setState({ name: event.target.value });
+							<Form.Control value={this.state.name} onChange={(event) => {this.setState({ name: event.target.value });
 									// console.log(this.state.name);
 								}}
 								type="text"
@@ -179,10 +169,7 @@ class App extends Component {
 
 						<Form.Group controlId="tokenSymbol">
 							<Form.Label>Token Symbol</Form.Label>
-							<Form.Control
-								value={this.state.symbol}
-								onChange={(event) => {
-									this.setState({ symbol: event.target.value });
+							<Form.Control value={this.state.symbol}	onChange={(event) => {this.setState({ symbol: event.target.value });
 								}}
 								type="text"
 								placeholder="Enter Token Symbol"
@@ -190,11 +177,8 @@ class App extends Component {
 						</Form.Group>
 
 						<Form.Group controlId="tokenDecimals">
-							<Form.Label>Decimal places</Form.Label>
-							<Form.Control
-								value={this.state.decimals}
-								onChange={(event) => {
-									this.setState({ decimals: event.target.value });
+							<Form.Label>Decimal Places</Form.Label>
+							<Form.Control value={this.state.decimals} onChange={(event) => {this.setState({ decimals: event.target.value });
 								}}
 								type="int"
 								placeholder="Enter Decimal Places"
@@ -203,18 +187,15 @@ class App extends Component {
 
 						<Form.Group controlId="totalSupply">
 							<Form.Label>Total Supply</Form.Label>
-							<Form.Control
-								value={this.state.totalSupply}
-								onChange={(event) => {
-									var temp = event.target.value;
+							<Form.Control	value={this.state.totalSupply} onChange={(event) => {var temp = event.target.value;
 									this.setState({ totalSupply: temp });
 								}}
 								type="int"
 								placeholder="Enter Total Supply"
 							/>
 						</Form.Group>
-
-						<Button variant="primary" type="submit">
+							<br/>		
+						<Button variant="success" type="submit">
 							Generate Token
 						</Button>
 					</Form>
@@ -226,7 +207,7 @@ class App extends Component {
 								{" "}
 								{this.state.name ? this.state.name : "[Token-name]"}{" "}
 							</span>{" "}
-							Token with symbol{" "}
+							Token with Symbol{" "}
 							<span style={{ color: this.state.symbol ? "red" : "black" }}>
 								{this.state.symbol ? this.state.symbol : "[symbol]"}{" "}
 							</span>{" "}
@@ -236,7 +217,7 @@ class App extends Component {
 									? this.state.totalSupply
 									: "[Total Supply]"}{" "}
 							</span>{" "}
-							Tokens generated at address{" "}
+							Tokens Generated at Address{" "}
 							<span style={{ color: this.state.address ? "red" : "black" }}>
 								{" "}
 								{this.state.address ? this.state.address : "[Address]"}{" "}
