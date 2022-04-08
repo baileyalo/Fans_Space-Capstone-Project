@@ -26,17 +26,16 @@ class App extends Component {
 	};
 
     componentDidMount = async () => {
+		
 		try {
-			// console.log("api key" + process.env.REACT_APP_API_KEY);
+			//console.log("api key" + process.env.REACT_APP_API_KEY);
 			// Get network provider and web3 instance.
 			const web3 = await getWeb3();
 
 			// Use web3 to get the user's accounts.
 			const accounts = await web3.user.eth.getAccounts();
-			// const raghuAccounts = process.env.REACT_APP_ACCOUNT;
-			const alAccounts =
-				"0x35E95CFa48001B9025b560D0865E4F8540313d8d" ||
-				process.env.REACT_APP_ACCOUNT;
+			// const alAccounts = process.env.REACT_APP_ACCOUNT;
+			const alAccounts = process.env.REACT_APP_ACCOUNT;
 			// console.log(accounts);
 			// console.log(alAccounts);
 
@@ -73,13 +72,14 @@ class App extends Component {
 	};
 
     makeToken = async (event) => {
-		// console.log(
-		// 	this.state.name +
-		// 		this.state.symbol +
-		// 		this.state.decimals +
-		// 		this.state.totalSupply
-		// );
-		// console.log(this.state.raghuAccounts + " " + this.state.accounts[0]);
+		//const promises = [];
+		console.log(
+		 	this.state.name +
+				this.state.symbol +
+				this.state.decimals +
+			this.state.totalSupply
+		);
+		// console.log(this.state.alAccounts + " " + this.state.accounts[0]);
 		this.setState({ message: "Generating new token...", loader: true });
 		var encodedABI = this.state.contract.methods
 			.generateToken(
@@ -87,16 +87,17 @@ class App extends Component {
 				this.state.symbol,
 				this.state.decimals,
 				this.state.totalSupply,
-				this.state.accounts[0]
+				this.state.accounts[1]
 			)
 			.encodeABI();
-		// console.log(encodedABI);
-		// var nonce = (await this.state.web3.raghu.eth.getTransactionCount(this.state.raghuAccounts));
+		 console.log(encodedABI);
+		 //var nonce = (await this.state.web3.al.eth.getTransactionCount(this.state.alAccounts));
 		// nonce += 16;
 		// console.log(nonce);
-		// console.log(this.state.contract.options.address);
+		 //console.log(this.state.contract.options.address);
 		// var _nonce = nonce.toString(16);
 		const tx = await this.state.web3.al.eth.accounts.signTransaction(
+			
 			{
 				// nonce:'0x' + _nonce,
 				to: this.state.contract.options.address,
@@ -108,20 +109,27 @@ class App extends Component {
 				hardfork: "petersburg",
 			},
 			"e231091d3a3f4573486c566f787547ae4182e90eaf5fa086f6c7a089d9f85553" ||
-				process.env.REACT_APP_PVT_KEY
+				 process.env.REACT_APP_PVT_KEY
+				
 		); // replace with process.env.REACT_APP_PVT_KEY
 		// console.log(tx);
 		// console.log(
-		// 	await this.state.web3.raghu.eth.accounts.recoverTransaction(
+		 //	await this.state.web3.al.eth.accounts.recoverTransaction(
 		// 		tx.rawTransaction
-		// 	)
+		 //	)
 		// );
-
+		console.log("9");
+		//console.log(tx.rawTransaction);
+		
 		const resp = await this.state.web3.al.eth.sendSignedTransaction(
 			tx.rawTransaction
+			
 		);
-		console.log(resp);
+		
 
+		console.log(resp);
+		
+		
 		this.setState({ message: "Generated new token", loader: false });
 		const addressess = await this.state.contract.methods
 			.getAllAddresses()
@@ -130,11 +138,13 @@ class App extends Component {
 		this.setState({
 			address: this.state.deployedTokenAddressList[
 				this.state.deployedTokenAddressList.length - 1
+				
 			],
 		});
+		console.log(this.state.contract.methods);
 		// this.setState({ name: "", symbol: "", decimals: "", totalSupply: "" });
 	};
-
+	
     render() {
 		if (!this.state.web3) {
 			return <div>Loading Web3, accounts, and contract...</div>;
@@ -226,8 +236,9 @@ class App extends Component {
 						{this.state.loader ? (
 							<div style={{ color: this.state.msgColor }}>
 								Message: {this.state.message}
-								<Spinner animation="border" role="status">
-									<span className="sr-only">Loading...</span>
+								<Spinner>
+								<Spinner animation="border" variant="success" role="status" />
+								
 								</Spinner>
 							</div>
 						) : (

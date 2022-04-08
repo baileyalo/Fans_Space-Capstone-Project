@@ -1,5 +1,5 @@
 import Web3 from "web3";
-// import HDWalletProvider from "@truffle/hdwallet-provider";
+ import HDWalletProvider from "@truffle/hdwallet-provider";
 
 const getWeb3 = () =>
 	new Promise((resolve, reject) => {
@@ -18,19 +18,37 @@ const getWeb3 = () =>
 					reject(error);
 				}
 			}
+
+				 // Legacy dapp browsers...
+			 else if (window.web3) {
+			   // Use Mist/MetaMask's provider.
+			  const web3 = window.web3;
+			   console.log("Injected web3 detected.");
+			   resolve(web3);
+			}
+			 // Fallback to localhost; use dev console port by default...
+
+			 const provider = new HDWalletProvider(
+			  "round claim canal social snake concert forest goose blast lift attend paddle",
+			  "https://rinkeby.infura.io/v3/b8c123d7c5ac4e6284451514c5c24efc"
+			 )
+			 web3Al = new Web3(provider);
+
 			
 
-			web3Al = new Web3(
-				new Web3.providers.HttpProvider(
-					"https://rinkeby.infura.io/v3/b8c123d7c5ac4e6284451514c5c24efc" ||
-						process.env.REACT_APP_API_KEY
-				)
-			);
+			//web3Al = new Web3(
+			//	new Web3.providers.HttpProvider(
+			//		"https://rinkeby.infura.io/v3/b8c123d7c5ac4e6284451514c5c24efc" ||
+			//			process.env.REACT_APP_API_KEY
+			//	)
+			//);
 
 			// console.log("No web3 instance injected, using Local web3.");
-			// resolve(web3Raghu);
+			 // resolve(web3Al);
 			resolve({ user: web3, al: web3Al });
+			
 		});
+	
 	});
 
 export default getWeb3;

@@ -10,13 +10,13 @@ import "../contracts/Storage.sol";
 contract TestStorage {
 
   function testItStoresAValue() public {
-    Storage storage = Storage(DeployedAddresses.Storage());
+  Storage simplestorage = Storage(DeployedAddresses.Storage());
 
-    storage.set(59);
+    simplestorage.set(59);
 
     uint expected = 59;
 
-    Assert.equal(storage.get(), expected, "It should store the value 59.");
+    Assert.equal(simplestorage.get(), expected, "It should store the value 59.");
   }
 
 }
