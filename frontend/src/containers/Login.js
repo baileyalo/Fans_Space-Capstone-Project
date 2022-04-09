@@ -1,44 +1,79 @@
-import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import "./Login.css";
+import React, {Component} from "react";
+class Login extends Component {
+    constructor() {
+        super();
+        this.state = {
+            username: '',
+            password: '',
+            rememberMe: false
+        }
+    }
+    render() {
+        const { username, password, rememberMe } = this.state;
+        return (
+            <form onSubmit={this.onSubmit} style={{ margin: 'auto', width: '50%' }}>
+                <h3>Login In</h3>
+                <div>
+                    <label>Username</label>
+                    <br />
+                    <input
+                        placeholder="Please enter your username"
+                        type="username"
+                        value={username}
+                        onChange={e => this.setState({ username: e.target.value })}
+                    />
+                </div>
+                <br />
+                <div>
+                    <label>Password</label>
+                    <br />
+                    <input
+                        placeholder="Please enter your password"
+                        type="password"
+                        value={password}
+                        onChange={e => this.setState({ password: e.target.value })}
+                    />
+                </div>
+                <br />
+                <div>
+                    <label>
+                        <input
+                            type="checkbox"
+                            checked={rememberMe}
+                            onChange={e => this.setState({ rememberMe: e.target.checked })}
+                        />
+                        Remember me?
+                    </label>
+                </div>
+                <br />
+                <div>
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+        )
+    }
 
-export default function Login() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+    validateForm = () => {
+        const { email, password } = this.state;
 
-  function validateForm() {
-    return username.length > 0 && password.length > 0;
-  }
+        let status = true;
+        if (email.length === 0) {
+            status = false;
+        }
+        if (password.length === 0) {
+            status = false;
+        }
+        return status;
+    }
 
-  function handleSubmit(event) {
-    event.preventDefault();
-  }
-
-  return (
-    <div className="Login">
-      <Form onSubmit={handleSubmit}>
-        <Form.Group size="lg" controlId="username">
-          <Form.Label>Username</Form.Label>
-          <Form.Control
-            autoFocus
-            type="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group size="lg" controlId="password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </Form.Group>
-        <Button block size="lg" type="submit" disabled={!validateForm()}>
-          Login
-        </Button>
-      </Form>
-    </div>
-  );
+    onSubmit = (e) => {
+        e.preventDefault();
+        const validationStatus = this.validateForm();
+        if (validationStatus === false) {
+            alert('Please fill all the required fields');
+        }
+        console.log(this.state);
+    }
 }
+
+export default Login;
