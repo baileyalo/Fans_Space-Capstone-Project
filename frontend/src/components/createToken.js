@@ -8,7 +8,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 
-class App extends Component {
+class createToken extends Component {
 	state = {
 		deployedTokenAddressList: [],
 		web3: null,
@@ -220,4 +220,4 @@ class App extends Component {
 	}
 
 }    
-export default App;
+export default createToken;

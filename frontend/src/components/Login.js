@@ -1,79 +1,97 @@
-import React, {Component} from "react";
+import { Component } from 'react';
+import {
+  Form,
+  FormGroup,  
+  Label,
+  Input,
+  Button,
+} from 'reactstrap';
+
+import '../App.css';
+ 
 class Login extends Component {
-    constructor() {
-        super();
-        this.state = {
-            username: '',
-            password: '',
-            rememberMe: false
-        }
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: '',
+      validate: {
+        emailState: '',
+      },
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+ 
+  handleChange = (event) => {
+    const { target } = event;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const { name } = target;
+ 
+    this.setState({
+      [name]: value,
+    });
+  };
+ 
+  validateEmail(e) {
+    const emailRex =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+ 
+    const { validate } = this.state;
+ 
+    if (emailRex.test(e.target.value)) {
+      validate.emailState = 'has-success';
+    } else {
+      validate.emailState = 'has-danger';
     }
-    render() {
-        const { username, password, rememberMe } = this.state;
-        return (
-            <form onSubmit={this.onSubmit} style={{ margin: 'auto', width: '50%' }}>
-                <h3>Login In</h3>
-                <div>
-                    <label>Username</label>
-                    <br />
-                    <input
-                        placeholder="Please enter your username"
-                        type="username"
-                        value={username}
-                        onChange={e => this.setState({ username: e.target.value })}
-                    />
-                </div>
-                <br />
-                <div>
-                    <label>Password</label>
-                    <br />
-                    <input
-                        placeholder="Please enter your password"
-                        type="password"
-                        value={password}
-                        onChange={e => this.setState({ password: e.target.value })}
-                    />
-                </div>
-                <br />
-                <div>
-                    <label>
-                        <input
-                            type="checkbox"
-                            checked={rememberMe}
-                            onChange={e => this.setState({ rememberMe: e.target.checked })}
-                        />
-                        Remember me?
-                    </label>
-                </div>
-                <br />
-                <div>
-                    <button type="submit">Submit</button>
-                </div>
-            </form>
-        )
-    }
-
-    validateForm = () => {
-        const { email, password } = this.state;
-
-        let status = true;
-        if (email.length === 0) {
-            status = false;
-        }
-        if (password.length === 0) {
-            status = false;
-        }
-        return status;
-    }
-
-    onSubmit = (e) => {
-        e.preventDefault();
-        const validationStatus = this.validateForm();
-        if (validationStatus === false) {
-            alert('Please fill all the required fields');
-        }
-        console.log(this.state);
-    }
+ 
+    this.setState({ validate });
+  }
+ 
+  submitForm(e) {
+    e.preventDefault();
+    console.log(`Email: ${this.state.email}`);
+  }
+ 
+  render() {
+    const { email, password } = this.state;
+ 
+    return (
+      <div className="App">
+        <h2>Sign In</h2>
+        <Form className="form" onSubmit={(e) => this.submitForm(e)}>
+          <FormGroup>
+            <Label>Username</Label>
+            <Input
+              type="email"
+              name="email"
+              id="exampleEmail"
+              placeholder="example@example.com"
+              valid={this.state.validate.emailState === "has-success"}
+              invalid={this.state.validate.emailState === "has-danger"}
+              value={email}
+              onChange={(e) => {
+                this.validateEmail(e);
+                this.handleChange(e);
+              }}
+            />
+         <br/>
+          </FormGroup>
+          <FormGroup>
+            <Label for="examplePassword">Password</Label>
+            <Input
+              type="password"
+              name="password"
+              id="examplePassword"
+              placeholder="********"
+              value={password}
+              onChange={(e) => this.handleChange(e)}
+            />
+          </FormGroup> <br/>
+          <Button>Submit</Button>
+        </Form>
+      </div>
+    );
+  }
 }
 
 export default Login;

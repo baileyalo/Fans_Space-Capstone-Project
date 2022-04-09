@@ -45,3 +45,35 @@ body {
   max-height: 100vh;
   max-width: 100vh;
 }
+
+.Login {
+  border: 2px solid #d3d3d3;
+  border-radius: .5em;
+  margin-bottom: 1em;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  padding: 1em;
+  text-align: left;
+  width: 600px;
+}
+
+.navbar navbar-expand-lg navbar-light bg-light{
+  border: 2px solid #d3d3d3;
+  padding: 1em;
+
+}
+
+.navbar-nav mr-auto{
+  border: 2px solid #d3d3d3;
+  padding: 1em;
+
+}
+ 
+.form {
+  padding: 1em;
+}
+ 
+label {
+  font-weight: 600;
+}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Routes ,Route  } from 'react-router-dom';
 import Home from './components/Home';
 import Login from './components/Login';
 import About from './components/About';
@@ -10,7 +10,7 @@ class App extends Component {
     return (
     <Router>
         <div>
-          <h2>Welcome to Fans-Space</h2>
+		<h2 style={{color: "Green"}}>Welcome To Fans-Space </h2>
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <ul className="navbar-nav mr-auto">
             <li><Link to={'/'} className="nav-link"> Home </Link></li>
@@ -19,13 +19,20 @@ class App extends Component {
             <li><Link to={'/about'} className="nav-link">About</Link></li>
           </ul>
           </nav>
-          <hr />
-          <Switch>
-              <Route exact path='/' component={Home} />
-			  <Route path='/login' component={Login} />
-              <Route path='/contact' component={Contact} />
-              <Route path='/about' component={About} />
-          </Switch>
+		  <hr  style={{
+    color: '#008000',
+    backgroundColor: '#008000',
+    height: .4,
+    borderColor : '#008000',
+	width:1200,
+	marginLeft: 60
+         }}/>
+          <Routes>
+              <Route exact path='/' element={<Home/>} />
+			  <Route path='/login' element={<Login/>} />
+              <Route path='/contact' element={<Contact/>} />
+              <Route path='/about' element={<About/>} />
+		</Routes> 
         </div>
       </Router>
     );
