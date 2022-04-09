@@ -5,7 +5,7 @@ pragma solidity 0.8.13;
 
 import "truffle/Assert.sol";
 import "truffle/DeployedAddresses.sol";
-import "../contracts/Storage.sol";
+import "./Storage.sol";
 
 contract TestStorage {
 

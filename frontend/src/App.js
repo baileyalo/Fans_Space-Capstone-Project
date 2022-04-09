@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import TokenGenerator from "./contracts/TokenGenerator.json";
 import getWeb3 from "./getWeb3";
 import Form from "react-bootstrap/Form";
@@ -6,9 +6,10 @@ import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import Routes from "./Routes";
 
 
-class App extends Component {
+class App extends React.Component {
 	state = {
 		deployedTokenAddressList: [],
 		web3: null,
@@ -42,6 +43,7 @@ class App extends Component {
 			// Get the contract instance.
 			const networkId = await web3.al.eth.net.getId();
 			// console.log("id" + networkId);
+			
 			const deployedNetwork = TokenGenerator.networks[networkId];
 			const instance = new web3.al.eth.Contract(
 				TokenGenerator.abi,
@@ -81,15 +83,13 @@ class App extends Component {
 		);
 		// console.log(this.state.alAccounts + " " + this.state.accounts[0]);
 		this.setState({ message: "Generating new token...", loader: true });
-		var encodedABI = this.state.contract.methods
-			.generateToken(
+		let encodedABI = this.state.contract.methods.generateToken(
 				this.state.name,
 				this.state.symbol,
 				this.state.decimals,
 				this.state.totalSupply,
 				this.state.accounts[1]
-			)
-			.encodeABI();
+			).encodeABI();
 		 console.log(encodedABI);
 		 //var nonce = (await this.state.web3.al.eth.getTransactionCount(this.state.alAccounts));
 		// nonce += 16;
@@ -125,8 +125,6 @@ class App extends Component {
 			tx.rawTransaction
 			
 		);
-		
-
 		console.log(resp);
 		
 		
@@ -153,8 +151,7 @@ class App extends Component {
 			<div
 				className="App container bg-white"
 				style={{ marginTop: "20px", marginBottom: "20px" }}
-			>
-			
+			>		
 
 				<div
 						style={{
@@ -164,7 +161,7 @@ class App extends Component {
 				>
 					<h1> Create Token </h1>
 					<Form
-						style={{ paddingTop: 50 }}onSubmit={(event) => {this.makeToken();event.preventDefault();
+						style={{ paddingTop: 30 }}onSubmit={(event) => {this.makeToken();event.preventDefault();
 						}}
 					>
 						<Form.Group controlId="tokenName">
@@ -246,6 +243,7 @@ class App extends Component {
 						)}
 					</div>
 				</div>
+				<Routes/>
 			</div>
 		);
 	}

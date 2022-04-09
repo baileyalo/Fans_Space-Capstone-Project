@@ -1,4 +1,4 @@
-pragma solidity 0.8.13;
+pragma solidity 0.6.10;
 
 //SPDX-License-Identifier: MIT
 
@@ -21,7 +21,7 @@ contract FANTOKEN {
         uint256 tokens
     );
     
-    constructor(string memory _name, string memory _symbol, uint256 _decimals, uint256 _supply, address tokenOwner)  {
+    constructor(string memory _name, string memory _symbol, uint256 _decimals, uint256 _supply, address tokenOwner) public  {
         name = _name;
         symbol = _symbol;
         decimals = _decimals;
