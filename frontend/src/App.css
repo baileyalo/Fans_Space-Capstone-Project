@@ -58,9 +58,10 @@ body {
   width: 600px;
 }
 
-.navbar navbar-expand-lg navbar-light bg-light{
-  border: 2px solid #d3d3d3;
-  padding: 1em;
+.text{
+  float: left;
+  margin-left: 15px;
+  margin-top: .5px;
 
 }
 
