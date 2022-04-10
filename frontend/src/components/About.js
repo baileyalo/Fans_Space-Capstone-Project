@@ -9,16 +9,20 @@ class About extends Component {
       fontSize: 18,
       color: "black",
       textAlign: "center",
-      paddingTop: "100px",
-      marginLeft: .5
+      paddingTop: "10px",
+      marginLeft: .5,
+      fontWeight: "bold" ,  
+      fontStyle: 'italic' 
     
     }
     const head = {
       fontSize:40 ,
       color: "Green",
+      marginLeft: 200.5,
       textAlign: "left",
       paddingTop: "5px",
-      font:"bold"    
+      fontWeight: "bold" ,  
+      fontStyle: "italic" 
           
     }
     return (
