@@ -21,7 +21,7 @@ contract FANTOKEN {
         uint256 tokens
     );
     
-    constructor(string memory _name, string memory _symbol, uint256 _decimals, uint256 _supply, address tokenOwner) public  {
+    constructor(string memory _name, string memory _symbol, uint256 _decimals, uint256 _supply, address tokenOwner) {
         name = _name;
         symbol = _symbol;
         decimals = _decimals;

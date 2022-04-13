@@ -9,7 +9,7 @@ contract TokenGenerator {
     address[] public deployedTokensAddresses;
     address payable owner;
     
-    constructor() public {
+    constructor() {
         owner = payable(msg.sender);
     }
     
