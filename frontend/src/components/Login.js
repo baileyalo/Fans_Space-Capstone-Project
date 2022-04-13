@@ -49,7 +49,7 @@ const handleLoginSubmit = (e) => {
       navigate('/CreateToken');
   } else {
       //bad combination
-      alert('wrong email or password combination');
+      alert('wrong username or password combination');
   }
 
 
