@@ -66,8 +66,10 @@ class Login extends Component {
           
     }
     return (
-      <div className="App1">
-        <h2 style={head}>Sign In </h2>
+      <div  	className="App container bg-white"
+				style={{ marginTop: "10px", marginBottom: "10px" , marginLeft: "30px", width: "100vh"}}
+			>	
+        <h2 style={head}> SIGN IN </h2>
         <Form className="form" onSubmit={(e) => this.submitForm(e)}>
           <FormGroup>
             <Label>Username</Label>

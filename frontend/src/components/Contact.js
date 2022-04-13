@@ -43,7 +43,7 @@ const Contact = () => {
 
       
       <div>
-    <h2 style={head}>Contact Us</h2>
+    <h2 style={head}>CONTACT US</h2>
 </div>
       <div>
       <Form.Group className="mb-3" controlId="formGroupEmail">
@@ -59,7 +59,7 @@ const Contact = () => {
     <Form.Control as="textarea" rows={4} />
   </Form.Group>
       </div>
-      <button type="submit">{status}</button>
+      <Button variant="success" type="submit">{status}</Button>
       </Form>
       </div>
   );
