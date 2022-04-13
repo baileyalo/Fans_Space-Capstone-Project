@@ -1,4 +1,5 @@
-import { Component } from 'react';
+import React, { useState}  from "react";
+import { useNavigate } from 'react-router-dom';
 import {
   Form,
   FormGroup,  
@@ -7,70 +8,58 @@ import {
 } from 'reactstrap';
 import Button from "react-bootstrap/Button";
 import '../App.css';
- 
-class Login extends Component {  
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: '',
-      password: '',
-      validate: {
-        usernameState: '',
-      },
-    };
-    this.handleChange = this.handleChange.bind(this);
+
+function Login(){
+
+  const head = {
+    fontSize:40 ,
+    color: "Green",
+    marginLeft: 200.5,
+    textAlign: "left",
+    paddingTop: "5px",
+    fontWeight: "bold" ,  
+    fontStyle: "italic" 
+        
+  }
+const [username, setUsername] = useState('');
+const [password, setPasswordInput] = useState('');
+
+const navigate = useNavigate();
+
+const handleUserChange = (e) => {
+  setUsername(e.target.value);
+}
+
+const handlePasswordChange = (e) => {
+    setPasswordInput(e.target.value);
+}
+
+const handleLoginSubmit = (e) => {
+    e.preventDefault();    
+    let hardcodedCred = {
+      username: 'admin',
+      password: 'admin123'
   }
 
-  
- 
-  handleChange = (event) => {
-    const { target } = event;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const { name } = target;
- 
-    this.setState({
-      [name]: value,
-    });
-  };
- 
- /* validateEmail(e) {
-    const emailRex =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
- 
-    const { validate } = this.state;
- 
-    if (emailRex.test(e.target.value)) {
-      validate.emailState = 'has-success';
-    } else {
-      validate.emailState = 'has-danger';
-    }
- 
-    this.setState({ validate });
+  if ((username === hardcodedCred.username) && (password=== hardcodedCred.password)) {
+      
+      const token = '123456abcdef';
+      sessionStorage.setItem('auth-token', token);
+     
+      navigate('/CreateToken');
+  } else {
+      //bad combination
+      alert('wrong email or password combination');
   }
- */
-  submitForm(e) {
-    e.preventDefault();
-    console.log(`Username: ${this.state.username}`);
-  }
- 
-  render() {
-    const { username, password } = this.state;
-    const head = {
-      fontSize:40 ,
-      color: "Green",
-      marginLeft: 180,
-      textAlign: "left",
-      paddingTop: "5px",
-      fontWeight: "bold" ,  
-      fontStyle: "italic" 
-          
-    }
+
+
+}
     return (
       <div  	className="App container bg-white"
 				style={{ marginTop: "10px", marginBottom: "10px" , marginLeft: "30px", width: "100vh"}}
 			>	
         <h2 style={head}> SIGN IN </h2>
-        <Form className="form" onSubmit={(e) => this.submitForm(e)}>
+        <Form className="form" onSubmit={handleLoginSubmit}>
           <FormGroup>
             <Label>Username</Label>
             <Input
@@ -78,13 +67,8 @@ class Login extends Component {
               name="username"
               id="exampleusername"
               placeholder="username"
-              valid={this.state.validate.usernameState === "has-success"}
-              invalid={this.state.validate.usernameState === "has-danger"}
               value={username}
-              onChange={(e) => {
-                //this.validateEmail(e);
-                this.handleChange(e);
-              }}
+              onChange={handleUserChange}
             />
          <br/>
           </FormGroup>
@@ -96,14 +80,14 @@ class Login extends Component {
               id="examplePassword"
               placeholder="********"
               value={password}
-              onChange={(e) => this.handleChange(e)}
+              onChange={handlePasswordChange}
             />
           </FormGroup> <br/>
           <Button variant="success" type="submit"> Submit</Button>
         </Form>
       </div>
     );
-  }
+  
 }
 
 export default Login;

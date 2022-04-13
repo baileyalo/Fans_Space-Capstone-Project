@@ -20,7 +20,6 @@ class App extends Component {
 			      <li><Link to={'/login'} className="nav-link"> Sign In</Link></li>
             <li><Link to={'/contact'} className="nav-link">Contact</Link></li>
             <li><Link to={'/about'} className="nav-link">About</Link></li>
-            <li><Link to={'/createtoken'} className="nav-link">Create Token</Link></li>
           </ul>
           </nav>
 		  <hr  style={{
