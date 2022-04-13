@@ -1,7 +1,15 @@
-.App {
+.App1 {
   text-align: center;
+  border-width: 150px;
+  max-width: 50vh;
  
 }
+.App {
+  text-align: center;
+  border-width: 5px;
+
+}
+ 
 
 .App-logo {
   height: 10vmin;
@@ -28,23 +36,54 @@ body {
   justify-content: left;
   font-size: calc(10px + 2vmin);
   color: white;
+  max-width: 50vh;
 }
 
 .App-link {
-  color: #09d3ac;
+  color: #e0f9f4;
 }
 
 
 .bg-white {
-	background-image: #fff;
+	background-image: rgb(184, 63, 63);
 	opacity: 0.93;
-	border-radius: 20px;
+	border-radius: 50px;
 	border-color: #008000;
 	border-style: solid;
 	border-width: 5px;
+  
+ 
+
+}
+
+.contactus {
+	background-image: #fff;
+	opacity: 0.93;
+  max-height: 100vh;
+  max-width: 70vh;
+  padding: 1em;
+  opacity: 0.93;
+
+  background-image: rgb(184, 63, 63);
+	opacity: 0.93;
+	border-radius: 50px;
+	border-color: #008000;
+	border-style: solid;
+	border-width: 5px;
+}
+.home {
+	background-image: #fff;
+	opacity: 0.93;
   max-height: 100vh;
   max-width: 100vh;
+  padding: 2em;
 }
+
+li:hover {
+  background-color: green;
+  border-radius: 15px;
+}
+
 
 .Login {
   border: 2px solid #d3d3d3;
@@ -52,10 +91,10 @@ body {
   margin-bottom: 1em;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 100px;
+  margin-top: 10px;
   padding: 1em;
   text-align: left;
-  width: 600px;
+  width: 10px;
 }
 
 .text{
@@ -65,9 +104,8 @@ body {
 
 }
 
-.navbar-nav mr-auto{
-  border: 2px solid #d3d3d3;
-  padding: 1em;
+.navbar-nav{
+
 
 }
  

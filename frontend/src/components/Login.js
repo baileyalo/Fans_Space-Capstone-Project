@@ -4,23 +4,24 @@ import {
   FormGroup,  
   Label,
   Input,
-  Button,
 } from 'reactstrap';
-
+import Button from "react-bootstrap/Button";
 import '../App.css';
  
-class Login extends Component {
+class Login extends Component {  
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
+      username: '',
       password: '',
       validate: {
-        emailState: '',
+        usernameState: '',
       },
     };
     this.handleChange = this.handleChange.bind(this);
   }
+
+  
  
   handleChange = (event) => {
     const { target } = event;
@@ -32,7 +33,7 @@ class Login extends Component {
     });
   };
  
-  validateEmail(e) {
+ /* validateEmail(e) {
     const emailRex =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
  
@@ -46,31 +47,40 @@ class Login extends Component {
  
     this.setState({ validate });
   }
- 
+ */
   submitForm(e) {
     e.preventDefault();
-    console.log(`Email: ${this.state.email}`);
+    console.log(`Username: ${this.state.username}`);
   }
  
   render() {
-    const { email, password } = this.state;
- 
+    const { username, password } = this.state;
+    const head = {
+      fontSize:40 ,
+      color: "Green",
+      marginLeft: 180,
+      textAlign: "left",
+      paddingTop: "5px",
+      fontWeight: "bold" ,  
+      fontStyle: "italic" 
+          
+    }
     return (
-      <div className="App">
-        <h2>Sign In</h2>
+      <div className="App1">
+        <h2 style={head}>Sign In </h2>
         <Form className="form" onSubmit={(e) => this.submitForm(e)}>
           <FormGroup>
             <Label>Username</Label>
             <Input
-              type="email"
-              name="email"
-              id="exampleEmail"
-              placeholder="example@example.com"
-              valid={this.state.validate.emailState === "has-success"}
-              invalid={this.state.validate.emailState === "has-danger"}
-              value={email}
+              type="username"
+              name="username"
+              id="exampleusername"
+              placeholder="username"
+              valid={this.state.validate.usernameState === "has-success"}
+              invalid={this.state.validate.usernameState === "has-danger"}
+              value={username}
               onChange={(e) => {
-                this.validateEmail(e);
+                //this.validateEmail(e);
                 this.handleChange(e);
               }}
             />
@@ -87,7 +97,7 @@ class Login extends Component {
               onChange={(e) => this.handleChange(e)}
             />
           </FormGroup> <br/>
-          <Button>Submit</Button>
+          <Button variant="success" type="submit"> Submit</Button>
         </Form>
       </div>
     );

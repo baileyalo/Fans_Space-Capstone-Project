@@ -1,11 +1,11 @@
 import React, {Component} from "react";
-import TokenGenerator from "./contracts/TokenGenerator.json";
-import getWeb3 from "./getWeb3";
+import TokenGenerator from "../contracts/TokenGenerator.json";
+import getWeb3 from "../getWeb3";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
+import "../App.css";
 
 
 class createToken extends Component {
@@ -121,7 +121,7 @@ class createToken extends Component {
 			<div
 				
 				className="App container bg-white"
-				style={{ marginTop: "20px", marginBottom: "20px" }}
+				style={{ marginTop: "10px", marginBottom: "10px" , marginLeft: "30px", width: "100vh"}}
 			>		
 				
 				<div
@@ -130,9 +130,10 @@ class createToken extends Component {
 						
 					}}
 				>
+					
 					<h1> Create Token </h1>
 					<Form
-						style={{ paddingTop: 30 }}onSubmit={(event) => {this.makeToken();event.preventDefault();
+						style={{ paddingTop: 50 }}onSubmit={(event) => {this.makeToken();event.preventDefault();
 						}}
 					>
 						<Form.Group controlId="tokenName">
