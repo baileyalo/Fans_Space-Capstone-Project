@@ -3,6 +3,8 @@
     "@openzeppelin/contracts": "^4.4.1",
     "@truffle/hdwallet-provider": "^2.0.4",
     "@trufflesuite/bigint-buffer": "^1.1.9",
+    "chai": "^4.3.6",
+    "chai-bn": "^0.3.1",
     "dotenv": "^16.0.0",
     "path": "^0.12.7",
     "truffle": "^5.5.7"
