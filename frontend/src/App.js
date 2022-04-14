@@ -5,6 +5,7 @@ import Login from './components/Login';
 import About from './components/About';
 import Contact from './components/Contact';
 import CreateToken from './components/CreateToken';
+import BuyToken from './components/BuyToken';
 import './App.css';
 
 
@@ -36,6 +37,7 @@ class App extends Component {
               <Route path='/contact' element={<Contact/>} />
               <Route path='/about' element={<About/>} />
               <Route path='/createtoken' element={<CreateToken/>} />
+              <Route path='/buytoken' element={<BuyToken/>} />
 	      	</Routes> 
         </div>
       </Router>

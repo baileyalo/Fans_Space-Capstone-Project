@@ -20,18 +20,18 @@ const getWeb3 = () =>
 			}
 
 				 // Legacy dapp browsers...
-			 else if (window.web3) {
+			  else if (window.web3) {
 			   // Use Mist/MetaMask's provider.
-			  const web3 = window.web3;
-			   console.log("Injected web3 detected.");
+			   const web3 = window.web3;
+			    console.log("Injected web3 detected.");
 			   resolve(web3);
-			}
+			 }
 			 // Fallback to localhost; use dev console port by default...
 
-			 const provider = new HDWalletProvider(
+			  const provider = new HDWalletProvider(
 			  "round claim canal social snake concert forest goose blast lift attend paddle",
 			  "https://rinkeby.infura.io/v3/b8c123d7c5ac4e6284451514c5c24efc"
-			 )
+			)
 			 web3Al = new Web3(provider);
 
 			

@@ -40,19 +40,27 @@ const handleLoginSubmit = (e) => {
       username: 'admin',
       password: 'admin123'
   }
-
+  let hardcodedCred1 = {
+    username: 'user',
+    password: 'user123'
+}
   if ((username === hardcodedCred.username) && (password=== hardcodedCred.password)) {
       
       const token = '123456abcdef';
       sessionStorage.setItem('auth-token', token);
      
       navigate('/CreateToken');
-  } else {
-      //bad combination
-      alert('wrong username or password combination');
-  }
-
-
+  } 
+  else if ((username === hardcodedCred1.username) && (password=== hardcodedCred1.password)) {
+      
+    const token1 = '123456abcdef';
+    sessionStorage.setItem('auth-token', token1);
+   
+    navigate('/BuyToken');
+} else {
+    //bad combination
+    alert('wrong username or password combination');
+}  
 }
     return (
       <div  	className="App container bg-white"
@@ -86,8 +94,8 @@ const handleLoginSubmit = (e) => {
           <Button variant="success" type="submit"> Submit</Button>
         </Form>
       </div>
-    );
-  
-}
+    ); 
+
+    }
 
 export default Login;
