@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import getWeb31 from "../getWeb31";
-
-import FANTOKEN from "../contracts/FANTOKEN.json";
+import TokenGenerator from "../contracts/TokenGenerator.json";
 import FanTokenSale from "../contracts/FanTokenSale.json";
 import KycContract from "../contracts/KycContract.json";
 
@@ -28,9 +27,9 @@ class BuyToken extends Component {
 	 
       this.networkId = await this.web3.eth.net.getId();
 
-      this.tokendeployedNetwork = FANTOKEN.networks[this.networkId];
+      this.tokendeployedNetwork = TokenGenerator.networks[this.networkId];
       this.tokenInstance = new this.web3.eth.Contract(
-        FANTOKEN.abi,
+        TokenGenerator.abi,
         this.tokendeployedNetwork && this.tokendeployedNetwork.address
       );
 
