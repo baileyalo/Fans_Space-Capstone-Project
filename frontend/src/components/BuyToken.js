@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import getWeb3 from "../getWeb3";
+import getWeb31 from "../getWeb31";
 
 import FANTOKEN from "../contracts/FANTOKEN.json";
 import FanTokenSale from "../contracts/FanTokenSale.json";
@@ -19,7 +19,7 @@ class BuyToken extends Component {
   componentDidMount = async () => {
     try {
       // Get network provider and web3 instance.
-      this.web3 = await getWeb3();
+      this.web3 = await getWeb31();
 
       // Use web3 to get the user's accounts.
       this.accounts = await this.web3.eth.getAccounts();
