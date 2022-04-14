@@ -2,7 +2,7 @@ const TokenGenerator = artifacts.require("./TokenGenerator.sol");
 const FanTokenSale = artifacts.require("./FanTokenSale.sol");
 const KycContract = artifacts.require("./KycContract.sol");
 
-require("dotenv").config({ path: "../.env" });
+require("dotenv").config({ path: "./.env" });
 
 module.exports = async function(deployer) {
   let addr = await web3.eth.getAccounts();
