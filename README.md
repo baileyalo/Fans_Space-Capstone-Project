@@ -3,7 +3,9 @@
 ----
 
 
-Fans Space is a Decentralized Application Built on Ethereum Blockchain Network
+
+
+   Fans Space is a Decentralized Application Built on Ethereum Blockchain Network
         
 that is designed to allows Fans from sporting events to be able to purchase tokens that
             
@@ -22,7 +24,7 @@ unlimited perks for global fans and can also be traded with other token holders.
 - Ganache
 - Metamask
 - Remix
-- Vs code
+- Vs Code
 - Rinkeby
 - Infura
 - Ethereum Testnet
