@@ -21,6 +21,7 @@ unlimited perks for global fans and can also be traded with other token holders.
 
 - Nodejs
 - React js
+- Express js
 - Truffle
 - Ganache
 - Metamask
