@@ -3,9 +3,14 @@
 ----
 
 
+<<<<<<< HEAD
 
 
    Fans Space is a Decentralized Application Built on Ethereum Blockchain Network
+=======
+![logo](https://user-images.githubusercontent.com/90293555/163591588-86784743-5d21-42ca-912a-5bb09ea6fadb.png)
+      Fans Space is a Decentralized Application Built on Ethereum Blockchain Network
+>>>>>>> 148b91da018b5a923a5039220d454cfe77bc7b8a
         
 that is designed to allows Fans from sporting events to be able to purchase tokens that
             
