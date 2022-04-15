@@ -122,18 +122,24 @@ class createToken extends Component {
 			return <div>Loading Web3, accounts, and contract...</div>;
 		}
 		return (
+		
+
+			
 			<div
-				
+		
 				className="App container bg-white"
 				style={{ marginTop: "10px", marginBottom: "10px" , marginLeft: "30px", width: "100vh"}}
-			>		
-				
+			>	
+			
 				<div
 						style={{
 						padding: "2px",
 						
 					}}
-				>
+
+					>	
+					
+				
 					
 					<h1> Create Token </h1>
 					<Form
@@ -219,7 +225,7 @@ class createToken extends Component {
 						)}
 					</div>
 				</div>
-				
+			
 			</div>
 		);
 	}

@@ -65,12 +65,11 @@ class BuyToken extends Component {
     let userTokens = await this.tokenInstance.methods
       .balanceOf(this.accounts[0])
       .call();
-    this.setState({ userTokens });
+    this.setState({userTokens: userTokens });
   };
 
   listenToTokenTransfer = () => {
-    this.tokenInstance.events.methods
-      .transfer({ to: this.accounts[0] })
+    this.tokenInstance.events.Transfer({ to: this.accounts[0] })
       .on("data", this.updateUserTokens);
   };
 

@@ -14,13 +14,15 @@ class App extends Component {
     return (
     <Router>
         <div>
-		<h2 style={{color: "Green"}}>Welcome To Fans-Space </h2>
+		<h2 style={{color: "Green", paddingLeft: "5px"}}>Welcome To Fans-Space </h2>
           <nav className="navbar navbar-expand-lg navbar-light navbar-toggler ">
           <ul className="navbar-nav">
             <li><Link to={'/'} className="nav-link"> Home </Link></li>
 			      <li><Link to={'/login'} className="nav-link"> Sign In</Link></li>
             <li><Link to={'/contact'} className="nav-link">Contact</Link></li>
             <li><Link to={'/about'} className="nav-link">About</Link></li>
+            <li><Link to={'/about'} className="nav-link">Create Token</Link></li>
+            <li><Link to={'/about'} className="nav-link">Buy Token</Link></li>
           </ul>
           </nav>
 		  <hr  style={{
