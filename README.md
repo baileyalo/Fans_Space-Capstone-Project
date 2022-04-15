@@ -1,8 +1,6 @@
 # FANS-SPACE DECENTRALIZED APPLICATION
-
-
-
-
+                
+----
 
 
 Fans Space is a Decentralized Application Built on Ethereum Blockchain Network
