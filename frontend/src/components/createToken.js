@@ -75,7 +75,7 @@ class createToken extends Component {
 				this.state.symbol,
 				this.state.decimals,
 				this.state.totalSupply,
-				this.state.accounts[1]
+				this.state.accounts[0]
 			).encodeABI();
 		 console.log(encodedABI);	
 		const tx = await this.state.web3.al.eth.accounts.signTransaction(
@@ -85,19 +85,23 @@ class createToken extends Component {
 				gas: "2000000",				
 				data: encodedABI,
 				chainId: 4,
+				from: "0x35E95CFa48001B9025b560D0865E4F8540313d8d",
 				chain: "rinkeby",
+				hardfork: "petersburg",
 				},
-			"e231091d3a3f4573486c566f787547ae4182e90eaf5fa086f6c7a089d9f85553" ||
 				 process.env.REACT_APP_PVT_KEY
 				
 		); 
 	
 		console.log("9");	
+		console.log(tx.rawTransaction);
 		const resp = await this.state.web3.al.eth.sendSignedTransaction(
 			tx.rawTransaction
 			
 		);
 		console.log(resp);	
+
+
 		this.setState({ message: "Generated new token", loader: false });
 		const addressess = await this.state.contract.methods
 			.getAllAddresses()
@@ -109,7 +113,7 @@ class createToken extends Component {
 				
 			],
 		});
-		console.log(this.state.contract.methods);
+
 		
 	};
 	

@@ -26,7 +26,8 @@ const getWeb31 = () =>
       // Fallback to localhost; use dev console port by default...
       else {
         const provider = new Web3.providers.HttpProvider(
-          "http://127.0.0.1:8545"
+          "https://rinkeby.infura.io/v3/b8c123d7c5ac4e6284451514c5c24efc" ||
+          process.env.REACT_APP_API_KEY
         );
         const web3 = new Web3(provider);
         console.log("No web3 instance injected, using Local web3.");

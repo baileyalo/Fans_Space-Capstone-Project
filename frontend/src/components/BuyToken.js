@@ -69,8 +69,8 @@ class BuyToken extends Component {
   };
 
   listenToTokenTransfer = () => {
-    this.tokenInstance.events
-      .Transfer({ to: this.accounts[0] })
+    this.tokenInstance.events.methods
+      .transfer({ to: this.accounts[0] })
       .on("data", this.updateUserTokens);
   };
 

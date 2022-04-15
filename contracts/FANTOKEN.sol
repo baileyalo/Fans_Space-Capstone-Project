@@ -16,26 +16,28 @@ contract FANTOKEN {
     
     event Transfer(address indexed from, address indexed to, uint256 tokens);
     event Approval(
-        address indexed tokenOwner,
+        address indexed TokenOwner,
         address indexed spender,
         uint256 tokens
     );
     
-    constructor(string memory _name, string memory _symbol, uint256 _decimals, uint256 _supply, address tokenOwner) {
+    constructor(string memory _name, string memory _symbol, uint256 _decimals, uint256 _supply, address TokenOwner) {
         name = _name;
         symbol = _symbol;
         decimals = _decimals;
         supply = _supply * 10**_decimals;
-        founder = tokenOwner;
+        founder = TokenOwner;
         balances[founder] = supply;
     }
 
-    function allowance(address tokenOwner, address spender)
+    function allowance(address TokenOwner, address spender)
         public
         view
         returns (uint256 remaining)
     {
-        return allowed[tokenOwner][spender];
+        return allowed[TokenOwner][spender];
+
+        
     }
 
     function approve(address spender, uint256 tokens)
@@ -64,12 +66,12 @@ contract FANTOKEN {
         return supply;
     }
 
-    function balanceOf(address tokenOwner)
+    function balanceOf(address TokenOwner)
         public
         view
         returns (uint256 balance)
     {
-        return balances[tokenOwner];
+        return balances[TokenOwner];
     }
 
     function transfer(address to, uint256 tokens)
