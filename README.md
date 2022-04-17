@@ -35,3 +35,6 @@ unlimited perks for global fans and can also be traded with other token holders.
 ### Test network:
 
 `$  truffle migrate --reset --network rinkeby`
+
+Demo: https://gateway.pinata.cloud/ipfs/QmUhZs4Qb1MXo6DvxdSQLB8eU3PpDDexTzyDh3aEgkUZXD
+

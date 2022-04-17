@@ -41,7 +41,7 @@ const handleLoginSubmit = (e) => {
       password: 'admin123'
   }
   let hardcodedCred1 = {
-    username: 'user',
+    username: 'baileyalo',
     password: 'user123'
 }
   if ((username === hardcodedCred.username) && (password=== hardcodedCred.password)) {

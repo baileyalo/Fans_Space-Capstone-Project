@@ -21,9 +21,7 @@ class App extends Component {
 			      <li><Link to={'/login'} className="nav-link"> Sign In</Link></li>
             <li><Link to={'/contact'} className="nav-link">Contact</Link></li>
             <li><Link to={'/about'} className="nav-link">About</Link></li>
-            <li><Link to={'/about'} className="nav-link">Create Token</Link></li>
-            <li><Link to={'/about'} className="nav-link">Buy Token</Link></li>
-          </ul>
+           </ul>
           </nav>
 		  <hr  style={{
     color: '#008000',
