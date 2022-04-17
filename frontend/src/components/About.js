@@ -27,11 +27,11 @@ class About extends Component {
           
     }
     return (
-      <div  className="about">
-     <div>
+<div  className="about">
+<div>
         <h2 style={head}>About</h2>
   <div>
-  <div  	className="App container bg-white"
+      <div	className="App container bg-white"
 				style={{ marginTop: "10px", marginBottom: "5px" , marginLeft: "30px", width: "150vh"}}
 			>	
       		<pre style={styleObj}>Fans Space is a Decentralized Application Built on Ethereum Blockchain <br/>network
@@ -45,9 +45,9 @@ class About extends Component {
             unlimited perks for global fans and can also be traded with <br/> other token holders.
           </pre>
           </div>
-      	</div>
-        </div>
-        </div>
+  	</div>
+  </div>
+</div>
     );
   }
 }

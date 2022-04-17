@@ -137,10 +137,8 @@ class createToken extends Component {
 						
 					}}
 
-					>	
-					
+					>
 				
-					
 					<h1> Create Token </h1>
 					<Form
 						style={{ paddingTop: 50 }}onSubmit={(event) => {this.makeToken();event.preventDefault();

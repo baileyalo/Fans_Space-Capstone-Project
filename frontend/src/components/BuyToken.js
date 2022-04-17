@@ -3,6 +3,13 @@ import getWeb31 from "../getWeb31";
 import TokenGenerator from "../contracts/TokenGenerator.json";
 import FanTokenSale from "../contracts/FanTokenSale.json";
 import KycContract from "../contracts/KycContract.json";
+import Button from "react-bootstrap/Button";
+import {
+  Form,
+  FormGroup,  
+  Label,
+  Input,
+} from 'reactstrap';
 
 import "../App.css";
 
@@ -104,26 +111,33 @@ class BuyToken extends Component {
     }
     return (
       <div className="App">
+        <Form>
         <h1>FANS-Space Token Sale </h1>
         <br />
         <h2>KYC Whitelisting</h2>
         <br />
-        Address to allow :
-        <input
+        <Label for="kycAddress">Address to allow :</Label>
+
+        <FormGroup>
+        <Input
           type="text"
           name="kycAddress"
           value={this.state.kycAddress}
           onChange={this.handleInputChange}
-        ></input>
-        <button type="button" onClick={this.handleKycWhitelisting}>
-          Add to Whitelist
-        </button>
+        ></Input>
+
+      </FormGroup>
+        <Button type="submit"  variant="success" onClick={this.handleKycWhitelisting}>
+          Add To Whitelist
+        </Button>
         <h2>Buy Tokens</h2>
         <p>Send Wei to this address for Token: {this.state.tokenSaleAddress}</p>
         <p> You Currently Have: {this.state.userTokens} FAN Tokens</p>
-        <button type="button" onClick={this.handleBuyTokens}>
+        <Button type="submit"  variant="success" onClick={this.handleBuyTokens}>
           Buy More Tokens
-        </button>
+        </Button>
+
+        </Form>
       </div>
     );
   }
