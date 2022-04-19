@@ -123,7 +123,7 @@ class createPolls extends Component {
 				
 					<h1> Create Poll </h1>
 					<Form
-						style={{ paddingTop: 50 }}onSubmit={(event) => {this.makeToken();event.preventDefault();
+						style={{ paddingTop: 50 }}onSubmit={(event) => {this.makePoll();event.preventDefault();
 						}}
 					>
 						<Form.Group controlId="teamName">
