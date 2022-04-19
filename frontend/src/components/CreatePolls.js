@@ -159,8 +159,7 @@ class createPolls extends Component {
 						</Button>
 					</Form>
                     <Spinner>
-					<Spinner animation="border" variant="success" role="status" />
-								
+					       <Spinner animation="border" variant="success" role="status" />								
 					</Spinner>
 				
 				</div>
