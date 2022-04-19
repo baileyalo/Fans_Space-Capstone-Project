@@ -121,89 +121,48 @@ class createPolls extends Component {
 
 					>
 				
-					<h1> Create Token </h1>
+					<h1> Create Poll </h1>
 					<Form
 						style={{ paddingTop: 50 }}onSubmit={(event) => {this.makeToken();event.preventDefault();
 						}}
 					>
-						<Form.Group controlId="tokenName">
-							<Form.Label>Token Name</Form.Label>
+						<Form.Group controlId="teamName">
+							<Form.Label>Sports Team</Form.Label>
 							<Form.Control value={this.state.name} onChange={(event) => {this.setState({ name: event.target.value });
 									// console.log(this.state.name);
 								}}
 								type="text"
-								placeholder="Enter Token Name"
+								placeholder="Enter Team Name"
 							/>
 						</Form.Group>
 
-						<Form.Group controlId="tokenSymbol">
-							<Form.Label>Token Symbol</Form.Label>
-							<Form.Control value={this.state.symbol}	onChange={(event) => {this.setState({ symbol: event.target.value });
+						<Form.Group controlId="pollNAme">
+							<Form.Label>Poll Name</Form.Label>
+							<Form.Control value={this.state.poll}	onChange={(event) => {this.setState({ poll: event.target.value });
 								}}
 								type="text"
-								placeholder="Enter Token Symbol"
+								placeholder="Poll name "
 							/>
 						</Form.Group>
 
-						<Form.Group controlId="tokenDecimals">
-							<Form.Label>Decimal Places</Form.Label>
-							<Form.Control value={this.state.decimals} onChange={(event) => {this.setState({ decimals: event.target.value });
+						<Form.Group controlId="Selection">
+							<Form.Label>Selection</Form.Label>
+							<Form.Control value={this.state.selection} onChange={(event) => {this.setState({ selection: event.target.value });
 								}}
 								type="int"
-								placeholder="Enter Decimal Places"
+								placeholder="Selections"
 							/>
-						</Form.Group>
-
-						<Form.Group controlId="totalSupply">
-							<Form.Label>Total Supply</Form.Label>
-							<Form.Control	value={this.state.totalSupply} onChange={(event) => {var temp = event.target.value;
-									this.setState({ totalSupply: temp });
-								}}
-								type="int"
-								placeholder="Enter Total Supply"
-							/>
-						</Form.Group>
+						</Form.Group>					
 							<br/>		
 						<Button variant="success" type="submit">
-							Generate Token
+							Submit
 						</Button>
 					</Form>
-
-					<div>
-						<div>
-							The{" "}
-							<span style={{ color: this.state.name ? "red" : "black" }}>
-								{" "}
-								{this.state.name ? this.state.name : "[Token-name]"}{" "}
-							</span>{" "}
-							Token with Symbol{" "}
-							<span style={{ color: this.state.symbol ? "red" : "black" }}>
-								{this.state.symbol ? this.state.symbol : "[symbol]"}{" "}
-							</span>{" "}
-							with{" "}
-							<span style={{ color: this.state.totalSupply ? "red" : "black" }}>
-								{this.state.totalSupply
-									? this.state.totalSupply
-									: "[Total Supply]"}{" "}
-							</span>{" "}
-							Tokens Generated at Address{" "}
-							<span style={{ color: this.state.address ? "red" : "black" }}>
-								{" "}
-								{this.state.address ? this.state.address : "[Address]"}{" "}
-							</span>
-						</div>
-						{this.state.loader ? (
-							<div style={{ color: this.state.msgColor }}>
-								Message: {this.state.message}
-								<Spinner>
-								<Spinner animation="border" variant="success" role="status" />
+                    <Spinner>
+					<Spinner animation="border" variant="success" role="status" />
 								
-								</Spinner>
-							</div>
-						) : (
-							<p></p>
-						)}
-					</div>
+					</Spinner>
+				
 				</div>
 			
 			</div>

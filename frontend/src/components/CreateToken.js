@@ -183,7 +183,7 @@ class createToken extends Component {
 						</Form.Group>
 							<br/>		
 						<Button variant="success" type="submit">
-							Generate Token
+							Submit
 						</Button>
 					</Form>
 
