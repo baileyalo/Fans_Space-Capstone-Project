@@ -21,62 +21,42 @@ function TradeToken(){
     fontStyle: "italic" 
         
   }
-const [username, setUsername] = useState('');
-const [password, setPasswordInput] = useState('');
+const [sportsname, setSportsname] = useState('');
+const [amount, setAmount] = useState('');
+const [address, setAddress] = useState('');
 
 const navigate = useNavigate();
 
 const handleUserChange = (e) => {
-  setUsername(e.target.value);
+    setSportsname(e.target.value);
 }
 
-const handlePasswordChange = (e) => {
-    setPasswordInput(e.target.value);
+const handleAmountChange = (e) => {
+    setAmount(e.target.value);
 }
+const handleAddressChange = (e) => {
+    setAddress(e.target.value);
+}
+
 
 const handleLoginSubmit = (e) => {
     e.preventDefault();    
-    let hardcodedCred = {
-      username: 'admin',
-      password: 'admin123'
-  }
-  let hardcodedCred1 = {
-    username: 'baileyalo',
-    password: 'user123'
-}
-  if ((username === hardcodedCred.username) && (password=== hardcodedCred.password)) {
-      
-      const token = '123456abcdef';
-      sessionStorage.setItem('auth-token', token);
-     
-      navigate('/CreateToken');
-      navigate('/CreatePolls');
-  } 
-  else if ((username === hardcodedCred1.username) && (password=== hardcodedCred1.password)) {
-      
-    const token1 = '123456abcdef';
-    sessionStorage.setItem('auth-token', token1);
-   
-    navigate('/BuyToken');
-    navigate('/TradeToken');
-} else {
-    //bad combination
-    alert('wrong username or password combination');
-}  
+
+
 }
     return (
       <div  	className="App container bg-white"
 				style={{ marginTop: "10px", marginBottom: "10px" , marginLeft: "30px", width: "100vh"}}
 			>	
-        <h2 style={head}> SIGN IN </h2>
+        <h2 style={head}> Trade Token </h2>
         <Form className="form" onSubmit={handleLoginSubmit}>
           <FormGroup>
-            <Label>Username</Label>
+            <Label>Name</Label>
             <Input
-              type="username"
-              name="username"
-              id="exampleusername"
-              placeholder="username"
+              type="sportsname"
+              name="sportsname"
+              id="sportsname"
+              placeholder="sportsname"
               value={username}
               onChange={handleUserChange}
             />
