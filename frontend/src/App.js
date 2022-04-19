@@ -6,6 +6,8 @@ import About from './components/About';
 import Contact from './components/Contact';
 import CreateToken from './components/CreateToken';
 import BuyToken from './components/BuyToken';
+import CreatePolls from './components/BuyToken';
+import TradeToken from './components/BuyToken';
 import './App.css';
 
 
@@ -38,6 +40,9 @@ class App extends Component {
               <Route path='/about' element={<About/>} />
               <Route path='/createtoken' element={<CreateToken/>} />
               <Route path='/buytoken' element={<BuyToken/>} />
+              <Route path='/createpoll' element={<CreatePolls/>} />
+              <Route path='/tradetoken' element={<TradeToken/>} />
+
 	      	</Routes> 
         </div>
       </Router>

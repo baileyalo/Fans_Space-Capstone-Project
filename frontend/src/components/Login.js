@@ -50,6 +50,7 @@ const handleLoginSubmit = (e) => {
       sessionStorage.setItem('auth-token', token);
      
       navigate('/CreateToken');
+      navigate('/CreatePolls');
   } 
   else if ((username === hardcodedCred1.username) && (password=== hardcodedCred1.password)) {
       
@@ -57,6 +58,7 @@ const handleLoginSubmit = (e) => {
     sessionStorage.setItem('auth-token', token1);
    
     navigate('/BuyToken');
+    navigate('/TradeToken');
 } else {
     //bad combination
     alert('wrong username or password combination');
