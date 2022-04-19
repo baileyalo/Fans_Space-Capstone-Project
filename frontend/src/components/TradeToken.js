@@ -1,5 +1,4 @@
 import React, { useState}  from "react";
-import { useNavigate } from 'react-router-dom';
 import {
   Form,
   FormGroup,  
@@ -25,9 +24,9 @@ const [sportsname, setSportsname] = useState('');
 const [amount, setAmount] = useState('');
 const [address, setAddress] = useState('');
 
-const navigate = useNavigate();
 
-const handleUserChange = (e) => {
+
+const handleTeamChange = (e) => {
     setSportsname(e.target.value);
 }
 
@@ -57,22 +56,34 @@ const handleLoginSubmit = (e) => {
               name="sportsname"
               id="sportsname"
               placeholder="sportsname"
-              value={username}
-              onChange={handleUserChange}
+              value={sportsname}
+              onChange={handleTeamChange}
             />
          <br/>
           </FormGroup>
           <FormGroup>
-            <Label for="examplePassword">Password</Label>
+            <Label for="amount">Amount</Label>
             <Input
-              type="password"
-              name="password"
-              id="examplePassword"
-              placeholder="********"
-              value={password}
-              onChange={handlePasswordChange}
+              type="amount"
+              name="amount"
+              id="exampleamount"
+              placeholder="amount"
+              value={amount}
+              onChange={handleAmountChange}
             />
-          </FormGroup> <br/>
+          </FormGroup> 
+          <FormGroup>
+            <Label for="Address">Address</Label>
+            <Input
+              type="Address"
+              name="Address"
+              id="exampleAddress"
+              placeholder="amount"
+              value={address}
+              onChange={handleAddressChange}
+            />
+          </FormGroup> 
+          <br/>
           <Button variant="success" type="submit"> Submit</Button>
         </Form>
       </div>
