@@ -88,7 +88,7 @@ Trade = async (event) => {
               type="sportsname"
               name="sportsname"
               id="sportsname"
-              placeholder="sportsname"
+              placeholder="sportsnames"
               value={sportsname}
               onChange={handleTeamChange}
             />
