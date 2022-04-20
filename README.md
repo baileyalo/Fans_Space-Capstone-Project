@@ -100,5 +100,5 @@ Etherscan: https://rinkeby.etherscan.io/tx/0xe59885afa3c635ac825eca33fee24a12aec
 ----
 ![Capstone Project (6)-1](https://user-images.githubusercontent.com/90293555/164121795-7872e228-a92b-41f9-b49e-e772ba1c1004.png)
 
-Demo: https://gateway.pinata.cloud/ipfs/QmUhZs4Qb1MXo6DvxdSQLB8eU3PpDDexTzyDh3aEgkUZXD
+
 
