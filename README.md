@@ -17,7 +17,7 @@ fans to be able to make decision on their teams through voting polls, VIP access
 unlimited perks for global fans and can also be traded with other token holders.
 
 
-### Technologies:
+### Technologies / Frameworks / Tools:
 
 - Node Js
 - React Js
