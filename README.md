@@ -68,5 +68,17 @@ Etherscan: https://rinkeby.etherscan.io/tx/0xe59885afa3c635ac825eca33fee24a12aec
 
 ----
 
+
+![Capstone Project (2)-1](https://user-images.githubusercontent.com/90293555/164121583-5e0fd11c-d3b1-4eb9-be10-21fc8953c467.png)
+
+----
+
+### ADMIN
+![Capstone Project (3)-1](https://user-images.githubusercontent.com/90293555/164121614-b1de5997-2568-4042-a7c3-8b98b4a4c093.png)
+
+----
+### USER
+![Capstone Project (4)-1](https://user-images.githubusercontent.com/90293555/164121645-b05e34d9-20aa-41c2-a3f0-75aa7c90eba5.png)
+
 Demo: https://gateway.pinata.cloud/ipfs/QmUhZs4Qb1MXo6DvxdSQLB8eU3PpDDexTzyDh3aEgkUZXD
 
