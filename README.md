@@ -61,24 +61,27 @@ Etherscan:https://rinkeby.etherscan.io/tx/0xe1adf722a994bf39961738956e33b540bf3b
 Etherscan: https://rinkeby.etherscan.io/tx/0xe59885afa3c635ac825eca33fee24a12aec8e3fd95050a3aafcb690e91dfd67d
 
 ----
-
-
 ![Capstone Project 1-1](https://user-images.githubusercontent.com/90293555/164121510-f56f53e1-eba2-440b-95dd-46df35d19d72.png)
 
 
 ----
-
-
 ![Capstone Project (2)-1](https://user-images.githubusercontent.com/90293555/164121583-5e0fd11c-d3b1-4eb9-be10-21fc8953c467.png)
 
 ----
 
-### ADMIN
+### SPORTS TEAM
 ![Capstone Project (3)-1](https://user-images.githubusercontent.com/90293555/164121614-b1de5997-2568-4042-a7c3-8b98b4a4c093.png)
 
 ----
-### USER
+### FANS
 ![Capstone Project (4)-1](https://user-images.githubusercontent.com/90293555/164121645-b05e34d9-20aa-41c2-a3f0-75aa7c90eba5.png)
+
+----
+![Capstone Project (5)-1](https://user-images.githubusercontent.com/90293555/164121764-3c4916ad-649a-48aa-ba54-ac334b0b7a34.png)
+
+
+----
+![Capstone Project (6)-1](https://user-images.githubusercontent.com/90293555/164121795-7872e228-a92b-41f9-b49e-e772ba1c1004.png)
 
 Demo: https://gateway.pinata.cloud/ipfs/QmUhZs4Qb1MXo6DvxdSQLB8eU3PpDDexTzyDh3aEgkUZXD
 
