@@ -32,7 +32,9 @@ unlimited perks for global fans and can also be traded with other token holders.
 - Ethereum Testnet
 
 
-### Test network:
+### How To Deploy Contracts:
+
+Rinkeby Test network:
 
 `$  truffle migrate --reset --network rinkeby`
 
@@ -68,6 +70,11 @@ Etherscan: https://rinkeby.etherscan.io/tx/0xe59885afa3c635ac825eca33fee24a12aec
 ![Capstone Project (2)-1](https://user-images.githubusercontent.com/90293555/164121583-5e0fd11c-d3b1-4eb9-be10-21fc8953c467.png)
 
 ----
+
+`$ https://github.com/baileyalo/dApp2-Final-Project.git `
+`$ cd frontend`
+`$ npm install`
+`$ npm start`
 
 ### SPORTS TEAM
 ![Capstone Project (3)-1](https://user-images.githubusercontent.com/90293555/164121614-b1de5997-2568-4042-a7c3-8b98b4a4c093.png)
