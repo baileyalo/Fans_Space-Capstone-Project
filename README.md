@@ -62,5 +62,9 @@ Etherscan: https://rinkeby.etherscan.io/tx/0xe59885afa3c635ac825eca33fee24a12aec
 
 ----
 
+[Capstone Project (1).pdf](https://github.com/baileyalo/dApp2-Final-Project/files/8517164/Capstone.Project.1.pdf)
+
+
+
 Demo: https://gateway.pinata.cloud/ipfs/QmUhZs4Qb1MXo6DvxdSQLB8eU3PpDDexTzyDh3aEgkUZXD
 
