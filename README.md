@@ -63,6 +63,8 @@ Etherscan:https://rinkeby.etherscan.io/tx/0xe1adf722a994bf39961738956e33b540bf3b
 Etherscan: https://rinkeby.etherscan.io/tx/0xe59885afa3c635ac825eca33fee24a12aec8e3fd95050a3aafcb690e91dfd67d
 
 ----
+
+### How to Run:
 ```javascript
 `$ https://github.com/baileyalo/dApp2-Final-Project.git `
 `$ cd frontend`
