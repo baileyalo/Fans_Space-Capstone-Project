@@ -68,7 +68,7 @@ Etherscan: https://rinkeby.etherscan.io/tx/0xe59885afa3c635ac825eca33fee24a12aec
 `$ cd frontend`
 `$ npm install`
 `$ npm start`
-    
+```
 ----
 ![Capstone Project 1-1](https://user-images.githubusercontent.com/90293555/164121510-f56f53e1-eba2-440b-95dd-46df35d19d72.png)
 
