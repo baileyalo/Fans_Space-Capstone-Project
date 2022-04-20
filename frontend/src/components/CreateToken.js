@@ -93,7 +93,6 @@ class createToken extends Component {
 				
 		); 
 	
-		console.log("9");	
 		console.log(tx.rawTransaction);
 		const resp = await this.state.web3.al.eth.sendSignedTransaction(
 			tx.rawTransaction

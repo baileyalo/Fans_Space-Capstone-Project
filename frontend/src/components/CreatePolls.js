@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import TokenGenerator from "../contracts/TokenGenerator.json";
+import KycContract from "../contracts/KycContract.json";
 import getWeb3 from "../getWeb3";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -34,9 +34,9 @@ class createPolls extends Component {
 			const alAccounts = process.env.REACT_APP_ACCOUNT;		
 			// Get the contract instance.
 			const networkId = await web3.al.eth.net.getId();
-			const deployedNetwork = TokenGenerator.networks[networkId];
+			const deployedNetwork = KycContract.networks[networkId];
 			const instance = new web3.al.eth.Contract(
-				TokenGenerator.abi,
+				KycContract.abi,
 				deployedNetwork.address,
 				{
 					from: alAccounts,
