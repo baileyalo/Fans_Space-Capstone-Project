@@ -3,7 +3,7 @@ let TokenTrade = artifacts.require('./TokenTrade');
 contract("Token Trade Contract", function(accounts){
     let TokenTradeInstance;
     let buyer = accounts[1]
-    let tokenAmount = 100000
+    let tokenAmount = 1000000
  it("Able to Transfer Tokens", function(){
      return TokenTrade.deployed().then(function(instance){
         TokenTradeInstance = instance;
