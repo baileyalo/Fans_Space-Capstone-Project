@@ -10,7 +10,7 @@ Fans Space is an Ethereum dApp for sports teams and fans. Teams issue fan tokens
 
 ## Run locally
 
-Prerequisites: Node.js and npm. From the project root, install both the contract and frontend dependencies:
+Prerequisites: Node.js 20 or newer and npm. From the project root, install the locked contract and frontend dependencies:
 
 ```bash
 npm run setup
