@@ -1,146 +1,108 @@
-import React, { Component } from "react";
-import getWeb31 from "../getWeb31";
-import TokenGenerator from "../contracts/TokenGenerator.json";
-import FanTokenSale from "../contracts/FanTokenSale.json";
-import KycContract from "../contracts/KycContract.json";
+import React, { useCallback, useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
-import {
-  Form,
-  FormGroup,  
-  Label,
-  Input,
-} from 'reactstrap';
+import Form from "react-bootstrap/Form";
+import { useWeb3 } from "../context/Web3Context";
 
-import "../App.css";
+export default function BuyToken() {
+  const { web3, contracts, account, isTeam, connected } = useWeb3();
+  const [kycAddress, setKycAddress] = useState("");
+  const [userTokens, setUserTokens] = useState("0");
+  const [saleAddress, setSaleAddress] = useState("");
+  const [amountWei, setAmountWei] = useState("1");
+  const [message, setMessage] = useState("");
 
-class BuyToken extends Component {
-  state = {
-    loaded: false,
-    kycAddress: "0x618...",
-    tokenSaleAddress: null,
-    userTokens: 0,
+  const refreshBalance = useCallback(async () => {
+    if (!contracts || !account) return;
+    const balance = await contracts.token.methods.balanceOf(account).call();
+    setUserTokens(balance);
+    setSaleAddress(contracts.sale.options.address);
+  }, [contracts, account]);
 
-  };
+  useEffect(() => {
+    refreshBalance().catch(console.error);
+  }, [refreshBalance]);
 
-  componentDidMount = async () => {
+  useEffect(() => {
+    if (!contracts || !account) return undefined;
+    const sub = contracts.token.events.Transfer({ filter: { to: account } }).on("data", refreshBalance);
+    return () => {
+      if (sub && sub.unsubscribe) {
+        sub.unsubscribe();
+      }
+    };
+  }, [contracts, account, refreshBalance]);
+
+  const handleKyc = async (event) => {
+    event.preventDefault();
+    setMessage("");
     try {
-      // Get network provider and web3 instance.
-      this.web3 = await getWeb31();
-
-      // Use web3 to get the user's accounts.
-      this.accounts = await this.web3.eth.getAccounts();
-		console.log (this.accounts);
-      // Get the contract instance.
-	 
-      this.networkId = await this.web3.eth.net.getId();
-
-      this.tokendeployedNetwork = TokenGenerator.networks[this.networkId];
-      this.tokenInstance = new this.web3.eth.Contract(
-        TokenGenerator.abi,
-        this.tokendeployedNetwork && this.tokendeployedNetwork.address
-      );
-
-      this.tokensaledeployedNetwork =
-        FanTokenSale.networks[this.networkId];
-      this.tokenSaleInstance = new this.web3.eth.Contract(
-        FanTokenSale.abi,
-        this.tokensaledeployedNetwork && this.tokensaledeployedNetwork.address
-      );
-
-      this.KycSaleDeployedNetwork = KycContract.networks[this.networkId];
-      this.kycInstance = new this.web3.eth.Contract(
-        KycContract.abi,
-        this.KycSaleDeployedNetwork && this.KycSaleDeployedNetwork.address
-      );
-
-      this.listenToTokenTransfer();
-      this.setState({
-        loaded: true,
-        tokenSaleAddress: this.tokensaledeployedNetwork.address,
-        updateUserTokens: this.updateUserTokens,
-      });
-    } catch (error) {
-      // Catch any errors for any of the above operations.
-      alert(
-        `Failed to load web3, accounts, or contract. Check console for details.`
-      );
-      console.error(error);
+      await contracts.kyc.methods.setKycCompleted(kycAddress).send({ from: account });
+      setMessage(`KYC completed for ${kycAddress}`);
+    } catch (err) {
+      setMessage(err.message || "KYC update failed. Only the team admin can whitelist.");
     }
   };
 
-  updateUserTokens = async () => {
-    let userTokens = await this.tokenInstance.methods
-      .balanceOf(this.accounts[0])
-      .call();
-    this.setState({userTokens: userTokens });
-  };
-
-  listenToTokenTransfer = () => {
-    this.tokenInstance.events.Transfer({ to: this.accounts[0] })
-      .on("data", this.updateUserTokens);
-  };
-
-  handleBuyTokens = async () => {
-    await this.tokenSaleInstance.methods
-      .buyTokens(this.accounts[0])
-      .send({
-        from: this.accounts[0],
-        value: this.web3.utils.toWei("1", "wei"),
+  const handleBuy = async (event) => {
+    event.preventDefault();
+    setMessage("");
+    try {
+      await contracts.sale.methods.buyTokens(account).send({
+        from: account,
+        value: web3.utils.toWei(amountWei, "wei"),
       });
-  };
-
-  handleInputChange = (e) => {
-    const target = e.target;
-    const value = e.type === "checkbox" ? target.checked : target.value;
-    const name = target.name;
-    this.setState({
-      [name]: value,
-    });
-  };
-
-  handleKycWhitelisting = async () => {
-    await this.kycInstance.methods
-      .setKycCompleted(this.state.kycAddress)
-      .send({ from: this.accounts[0] });
-    alert("KYC for " + this.state.kycAddress + " is completed");
-  };
-
-  render() {
-    if (!this.state.loaded) {
-      return <div>Loading Web3, accounts, and contract...</div>;
+      setMessage("Purchase confirmed.");
+      await refreshBalance();
+    } catch (err) {
+      setMessage(err.message || "Purchase failed. Complete KYC first.");
     }
-    return (
-      <div className="App">
-        <Form>
-        <h1>FANS-Space Token Sale </h1>
-        <br />
-        <h2>KYC Whitelisting</h2>
-        <br />
-        <Label for="kycAddress">Address to allow :</Label>
+  };
 
-        <FormGroup>
-        <Input
-          type="text"
-          name="kycAddress"
-          value={this.state.kycAddress}
-          onChange={this.handleInputChange}
-        ></Input>
-
-      </FormGroup>
-        <Button type="submit"  variant="success" onClick={this.handleKycWhitelisting}>
-          Add To Whitelist
-        </Button>
-        <h2>Buy Tokens</h2>
-        <p>Send Wei to this address for Token: {this.state.tokenSaleAddress}</p>
-        <p> You Currently Have: {this.state.userTokens} FAN Tokens</p>
-        <Button type="submit"  variant="success" onClick={this.handleBuyTokens}>
-          Buy More Tokens
-        </Button>
-
-        </Form>
-      </div>
-    );
+  if (!connected) {
+    return <div className="page-card">Connect a wallet first.</div>;
   }
-}
 
-export default BuyToken;
+  return (
+    <div className="page-card">
+      <h1>FAN token sale</h1>
+      <p>Sale contract: {saleAddress}</p>
+      <p>You currently hold {userTokens} FAN tokens.</p>
+
+      {isTeam && (
+        <Form onSubmit={handleKyc} className="mb-4">
+          <h2>Team: KYC whitelist</h2>
+          <Form.Group className="mb-3">
+            <Form.Label>Fan address</Form.Label>
+            <Form.Control
+              value={kycAddress}
+              onChange={(e) => setKycAddress(e.target.value)}
+              placeholder="0x…"
+              required
+            />
+          </Form.Group>
+          <Button variant="success" type="submit">
+            Add to whitelist
+          </Button>
+        </Form>
+      )}
+
+      <Form onSubmit={handleBuy}>
+        <h2>Buy tokens</h2>
+        <p>Rate: 1 wei buys 1 FAN (decimals = 0 in the default deploy).</p>
+        <Form.Group className="mb-3">
+          <Form.Label>Amount (wei)</Form.Label>
+          <Form.Control
+            type="number"
+            min="1"
+            value={amountWei}
+            onChange={(e) => setAmountWei(e.target.value)}
+          />
+        </Form.Group>
+        <Button variant="success" type="submit">
+          Buy
+        </Button>
+      </Form>
+      {message && <p className="mt-3">{message}</p>}
+    </div>
+  );
+}

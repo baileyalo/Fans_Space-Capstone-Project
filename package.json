@@ -1,0 +1,10 @@
+{
+  "name": "fans-space",
+  "private": true,
+  "scripts": {
+    "setup": "npm install --prefix Backend && npm install --prefix frontend",
+    "chain": "npm --prefix Backend run chain",
+    "local": "npm --prefix Backend run migrate && npm --prefix frontend start",
+    "test": "npm --prefix Backend test"
+  }
+}

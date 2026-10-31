@@ -1,87 +1,29 @@
+// SPDX-License-Identifier: MIT
 pragma solidity 0.8.13;
 
-//SPDX-License-Identifier: MIT
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract FANTOKEN {
-    string public name;
-    string public symbol;
-    uint256 public decimals;
+contract FANTOKEN is ERC20, Ownable {
+    uint8 private immutable _customDecimals;
 
-    uint256 public supply;
-    address public founder;
+    constructor(
+        string memory name_,
+        string memory symbol_,
+        uint8 decimals_,
+        uint256 supply_,
+        address tokenOwner
+    ) ERC20(name_, symbol_) {
+        require(tokenOwner != address(0), "owner is zero address");
+        require(bytes(name_).length > 0 && bytes(symbol_).length > 0, "name and symbol required");
+        require(supply_ > 0, "supply must be > 0");
 
-    mapping(address => uint256) public balances;
-    mapping(address => mapping(address => uint256)) allowed;
-
-    
-    event Transfer(address indexed from, address indexed to, uint256 tokens);
-    event Approval(
-        address indexed TokenOwner,
-        address indexed spender,
-        uint256 tokens
-    );
-    
-    constructor(string memory _name, string memory _symbol, uint256 _decimals, uint256 _supply, address TokenOwner) {
-        name = _name;
-        symbol = _symbol;
-        decimals = _decimals;
-        supply = _supply * 10**_decimals;
-        founder = TokenOwner;
-        balances[founder] = supply;
+        _customDecimals = decimals_;
+        _mint(tokenOwner, supply_ * (10 ** uint256(decimals_)));
+        _transferOwnership(tokenOwner);
     }
 
-    function allowance(address TokenOwner, address spender)
-        public
-        view
-        returns (uint256 remaining)
-    {
-        return allowed[TokenOwner][spender];
-
-        
-    }
-
-    function approve(address spender, uint256 tokens)
-        public
-        returns (bool success)
-    {
-        require(balances[msg.sender] >= tokens,"Not enough balance");
-        require(tokens > 0,"Tokens <= 0");
-        allowed[msg.sender][spender] = tokens;
-        emit Approval(msg.sender, spender, tokens);
-        return true;
-    }
-
-    function transferFrom(address from, address to, uint256 tokens)
-        public
-        returns (bool success)
-    {
-        require(balances[from] >= tokens,"Not enough balance");
-        balances[from] -= tokens;
-        balances[to] += tokens;
-        emit Transfer(from, to, tokens);
-        return true;
-    }
-
-    function totalSupply() public view returns (uint256) {
-        return supply;
-    }
-
-    function balanceOf(address TokenOwner)
-        public
-        view
-        returns (uint256 balance)
-    {
-        return balances[TokenOwner];
-    }
-
-    function transfer(address to, uint256 tokens)
-        public
-        returns (bool success)
-    {
-        require(tokens > 0, "token <= 0 ");
-        balances[to] += tokens;
-        balances[msg.sender] -= tokens;
-        emit Transfer(msg.sender, to, tokens);
-        return true;
+    function decimals() public view override returns (uint8) {
+        return _customDecimals;
     }
 }

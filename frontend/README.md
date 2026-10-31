@@ -1,11 +1,11 @@
-# Getting Started with Create React App
+# Fans Space frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The React UI is part of the full Fans Space dApp. For the recommended local workflow, see the project root README and use `npm run setup`, `npm run chain`, and `npm run local` from the project root.
 
-## Available Scripts
+To run only the UI after deploying contracts to the configured local network:
 
-In the project directory, you can run:
+```bash
+npm start
+```
 
-### `npm start`
-
-
+The frontend reads the contract addresses from the Truffle artifacts in `src/contracts`. The default RPC URL is `http://127.0.0.1:8545`; set `REACT_APP_RPC_URL` only when using a different local endpoint.

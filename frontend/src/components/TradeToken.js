@@ -1,127 +1,59 @@
-import React, { useState}  from "react";
-import TradeToken from "../contracts/TradeToken.json";
-import {
-  Form,
-  FormGroup,  
-  Label,
-  Input,
-} from 'reactstrap';
+import React, { useState } from "react";
+import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import '../App.css';
+import { useWeb3 } from "../context/Web3Context";
 
-function TradeToken(){
+export default function TradeToken() {
+  const { contracts, account, connected } = useWeb3();
+  const [to, setTo] = useState("");
+  const [amount, setAmount] = useState("");
+  const [message, setMessage] = useState("");
+  const [busy, setBusy] = useState(false);
 
-  const head = {
-    fontSize:40 ,
-    color: "Green",
-    marginLeft: 200.5,
-    textAlign: "left",
-    paddingTop: "5px",
-    fontWeight: "bold" ,  
-    fontStyle: "italic" 
-        
-  }
-const [sportsname, setSportsname] = useState('');
-const [amount, setAmount] = useState('');
-const [address, setAddress] = useState('');
-
-
-
-const handleTeamChange = (e) => {
-    setSportsname(e.target.value);
-}
-
-const handleAmountChange = (e) => {
-    setAmount(e.target.value);
-}
-const handleAddressChange = (e) => {
-    setAddress(e.target.value);
-}
-
-
-Trade = async (event) => {
-  //const promises = [];
-
-  this.setState({ message: "Token trade...", loader: true });
-  let encodedABI = this.state.contract.methods.transfer(
-    this.state.name,
-    this.state.symbol,
-    this.state.decimals,
-    this.state.accounts[0]
-    ).encodeABI();
-   console.log(encodedABI);	
-  const tx = await this.state.web3.al.eth.accounts.signTransaction(
-    
-    {				
-      to: this.state.contract.options.address,
-      gas: "2000000",				
-      data: encodedABI,
-      chainId: 4,
-      chain: "rinkeby",
-      hardfork: "petersburg",
-      },
-       process.env.REACT_APP_PVT_KEY
-      
-  ); 
-
-  //console.log(tx.rawTransaction);
-  const resp = await this.state.web3.al.eth.sendSignedTransaction(
-    tx.rawTransaction
-    
-  );
-  console.log(resp);	
-
-
-  this.setState({ message: "New Poll Generated", loader: false });
-    
-};
-    return (
-      <div  	className="App container bg-white"
-				style={{ marginTop: "10px", marginBottom: "10px" , marginLeft: "30px", width: "100vh"}}
-			>	
-        <h2 style={head}> Trade Token </h2>
-        <Form className="form" onSubmit={(event) => {this.Trade();event.preventDefault(); 
-        >
-          <FormGroup>
-            <Label>Name</Label>
-            <Input
-              type="sportsname"
-              name="sportsname"
-              id="sportsname"
-              placeholder="sportsnames"
-              value={sportsname}
-              onChange={handleTeamChange}
-            />
-         <br/>
-          </FormGroup>
-          <FormGroup>
-            <Label for="amount">Amount</Label>
-            <Input
-              type="amount"
-              name="amount"
-              id="exampleamount"
-              placeholder="amount"
-              value={amount}
-              onChange={handleAmountChange}
-            />
-          </FormGroup> 
-          <FormGroup>
-            <Label for="Address">Address</Label>
-            <Input
-              type="Address"
-              name="Address"
-              id="exampleAddress"
-              placeholder="amount"
-              value={address}
-              onChange={handleAddressChange}
-            />
-          </FormGroup> 
-          <br/>
-          <Button variant="success" type="submit"> Submit</Button>
-        </Form>
-      </div>
-    ); 
-
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    setBusy(true);
+    setMessage("Approving trade contract…");
+    try {
+      await contracts.token.methods.approve(contracts.trade.options.address, amount).send({ from: account });
+      setMessage("Sending tokens…");
+      await contracts.trade.methods.transfer(to, amount).send({ from: account });
+      setMessage("Transfer complete.");
+    } catch (err) {
+      setMessage(err.message || "Trade failed.");
+    } finally {
+      setBusy(false);
     }
+  };
 
-export default TradeToken;
+  if (!connected) {
+    return <div className="page-card">Connect a wallet first.</div>;
+  }
+
+  return (
+    <div className="page-card">
+      <h2 className="page-title">Trade FAN tokens</h2>
+      <p>Approves the trade contract, then transfers FAN to another wallet.</p>
+      <Form onSubmit={onSubmit}>
+        <Form.Group className="mb-3">
+          <Form.Label>Recipient address</Form.Label>
+          <Form.Control value={to} onChange={(e) => setTo(e.target.value)} required placeholder="0x…" />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Amount</Form.Label>
+          <Form.Control
+            type="number"
+            min="1"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            required
+          />
+        </Form.Group>
+        <Button variant="success" type="submit" disabled={busy}>
+          {busy ? "Working…" : "Send tokens"}
+        </Button>
+      </Form>
+      {message && <p className="mt-3">{message}</p>}
+    </div>
+  );
+}

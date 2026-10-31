@@ -1,2 +1,15 @@
 .env
-/node_modules
+.env.local
+.env.*.local
+.DS_Store
+
+node_modules/
+**/node_modules/
+
+frontend/build/
+coverage/
+.turbo/
+
+# Truffle
+Backend/build/
+*.log

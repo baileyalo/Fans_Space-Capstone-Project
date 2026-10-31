@@ -1,51 +1,44 @@
- require("dotenv").config({ path: "../.env" });
-
 const Token = artifacts.require("FANTOKEN");
-
 const chai = require("./setupchai");
 const BN = web3.utils.BN;
 const expect = chai.expect;
 
-contract("Token Test", async (accounts) => {
-  const [initialHolder, recipient, anotherAccount] = accounts;
+contract("FANTOKEN", (accounts) => {
+  const [initialHolder, recipient] = accounts;
+  const supply = "1000000";
 
   beforeEach(async () => {
-    this.FANTOKEN = await Token.new(process.env.INITIAL_TOKENS);
+    this.token = await Token.new("FAN Token", "FAN", 0, supply, initialHolder);
   });
 
-  it("All tokens should be in my account", async () => {
-    let instance = this.FANTOKEN;
-    let totalSupply = await instance.totalSupply();
-    return await expect(
-      instance.balanceOf(initialHolder)
-    ).to.eventually.be.a.bignumber.equal(totalSupply);
+  it("mints the full supply to the token owner", async () => {
+    const totalSupply = await this.token.totalSupply();
+    await expect(this.token.balanceOf(initialHolder)).to.eventually.be.a.bignumber.equal(totalSupply);
+    expect(totalSupply.toString()).to.equal(supply);
   });
 
-  it("is possible to send tokens between accounts", async () => {
+  it("transfers tokens between accounts", async () => {
     const sendTokens = 1;
-    let instance = this.FANTOKEN;
-    let totalSupply = await instance.totalSupply();
-    await expect(
-      instance.balanceOf(initialHolder)
-    ).to.eventually.be.a.bignumber.equal(totalSupply);
-    await expect(instance.transfer(recipient, sendTokens)).to.eventually.be
-      .fulfilled;
-    await expect(
-      instance.balanceOf(initialHolder)
-    ).to.eventually.be.a.bignumber.equal(totalSupply.sub(new BN(sendTokens)));
-    return await expect(
-      instance.balanceOf(recipient)
-    ).to.eventually.be.a.bignumber.equal(new BN(sendTokens));
+    const totalSupply = await this.token.totalSupply();
+    await expect(this.token.transfer(recipient, sendTokens)).to.eventually.be.fulfilled;
+    await expect(this.token.balanceOf(initialHolder)).to.eventually.be.a.bignumber.equal(
+      totalSupply.sub(new BN(sendTokens))
+    );
+    await expect(this.token.balanceOf(recipient)).to.eventually.be.a.bignumber.equal(new BN(sendTokens));
   });
 
-  it("is not possible to send more tokens than avaible in total", async () => {
-    let instance = this.FANTOKEN;
-    let balanceOfAccount = await instance.balanceOf(initialHolder);
+  it("rejects transfers above the sender balance", async () => {
+    const balance = await this.token.balanceOf(initialHolder);
+    await expect(this.token.transfer(recipient, balance.add(new BN(1)))).to.eventually.be.rejected;
+    await expect(this.token.balanceOf(initialHolder)).to.eventually.be.a.bignumber.equal(balance);
+  });
 
-    await expect(instance.transfer(recipient, new BN(balanceOfAccount + 1))).to
-      .eventually.be.rejected;
-    return await expect(
-      instance.balanceOf(initialHolder)
-    ).to.eventually.be.a.bignumber.equal(balanceOfAccount);
+  it("requires allowance for transferFrom", async () => {
+    await expect(this.token.transferFrom(initialHolder, recipient, 10, { from: recipient })).to.eventually.be
+      .rejected;
+    await this.token.approve(recipient, 10, { from: initialHolder });
+    await expect(this.token.transferFrom(initialHolder, recipient, 10, { from: recipient })).to.eventually.be
+      .fulfilled;
+    await expect(this.token.balanceOf(recipient)).to.eventually.be.a.bignumber.equal(new BN(10));
   });
 });

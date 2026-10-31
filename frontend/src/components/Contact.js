@@ -2,67 +2,57 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-const Contact = () => {
-  const head = {
-    fontSize:40 ,
-    color: "Green",
-    marginLeft: 200.5,
-    textAlign: "left",
-    paddingTop: "5px",
-    fontWeight: "bold" ,  
-    fontStyle: "italic" 
-        
-  }
+export default function Contact() {
   const [status, setStatus] = useState("Submit");
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setStatus("Sent");
-    const { name, email, message } = e.target.elements;
-    let details = {
-      name: name.value,
-      email: email.value,
-      message: message.value,
-    };
-    let response = await fetch("https://submit-form.com/0wZE9uUu", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      body: JSON.stringify(details),
-    });
-    setStatus("Submit");
-    let result = await response.json();
-    alert(result.status);
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setStatus("Sending…");
+    const { name, email, body } = event.target.elements;
+    try {
+      const response = await fetch("https://submit-form.com/0wZE9uUu", {
+        method: "POST",
+        headers: { "Content-Type": "application/json;charset=utf-8" },
+        body: JSON.stringify({
+          name: name.value,
+          email: email.value,
+          message: body.value,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error("Could not send message");
+      }
+      setMessage("Thanks — your message was sent.");
+      event.target.reset();
+    } catch (err) {
+      setMessage(err.message || "Send failed.");
+    } finally {
+      setStatus("Submit");
+    }
   };
+
   return (
-
-<div  	className="App container bg-white"
-				style={{ marginTop: "10px", marginBottom: "10px" , marginLeft: "30px", width: "100vh"}}
-			>	
-    <Form style={{ paddingTop: 10 }} onSubmit={handleSubmit}>
-
-      
-      <div>
-    <h2 style={head}>CONTACT US</h2>
-</div>
-      <div>
-      <Form.Group className="mb-3" controlId="formGroupEmail">
-    <Form.Label>Name</Form.Label>
-    <Form.Control type="name" placeholder="Enter Full Name" />
-  </Form.Group>
-      <Form.Group className="mb-3" controlId="formGroupEmail">
-    <Form.Label>Email address</Form.Label>
-    <Form.Control type="email" placeholder="Enter email" />
-  </Form.Group>
-  <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-    <Form.Label>Message</Form.Label>
-    <Form.Control as="textarea" rows={4} />
-  </Form.Group>
-      </div>
-      <Button variant="success" type="submit">{status}</Button>
+    <div className="page-card">
+      <h2 className="page-title">Contact us</h2>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3">
+          <Form.Label>Name</Form.Label>
+          <Form.Control name="name" type="text" placeholder="Full name" required />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Email</Form.Label>
+          <Form.Control name="email" type="email" placeholder="you@example.com" required />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Message</Form.Label>
+          <Form.Control name="body" as="textarea" rows={4} required />
+        </Form.Group>
+        <Button variant="success" type="submit">
+          {status}
+        </Button>
       </Form>
-      </div>
+      {message && <p className="mt-3">{message}</p>}
+    </div>
   );
-};
-
-export default Contact;
+}

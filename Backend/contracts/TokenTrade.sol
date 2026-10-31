@@ -1,37 +1,26 @@
-//SPDX-License-Identifier: MIT
-
-
+// SPDX-License-Identifier: MIT
 pragma solidity 0.8.13;
 
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 contract TokenTrade {
+    using SafeERC20 for IERC20;
 
-uint public initialSupply;
-//Tracking the count of total tokens transferred
-uint public tokenTransfered;
-//Mapping the tracks the balance of tokens for each account
-mapping(address => uint) public balanceOf;
+    IERC20 public immutable token;
 
-constructor(uint _initialSupply) {
-balanceOf[msg.sender] = _initialSupply;
-initialSupply = _initialSupply;
-}
+    event Transfer(address indexed from, address indexed to, uint256 amount);
 
-//Event Transfer to notify everyone on the network
-event Transfer (
-    address from,
-    address to,
-    uint amount
-);
+    constructor(IERC20 token_) {
+        require(address(token_) != address(0), "token is zero address");
+        token = token_;
+    }
 
-
-//Transfer Function
-function transfer(address _to, uint _amount) public returns (bool){
-require(balanceOf[msg.sender] >= _amount);
-balanceOf[msg.sender] -= _amount;
-balanceOf[_to] += _amount;
-tokenTransfered += _amount;
-emit Transfer(msg.sender, _to, _amount);
-return true;
-}
+    function transfer(address to, uint256 amount) public returns (bool) {
+        require(to != address(0), "recipient is zero address");
+        require(amount > 0, "amount must be > 0");
+        token.safeTransferFrom(msg.sender, to, amount);
+        emit Transfer(msg.sender, to, amount);
+        return true;
+    }
 }
